@@ -1,0 +1,165 @@
+// Example usage for additional statistical and mathematical functions
+
+import scalar
+
+// Define scalars and other necessary data
+scalars = [scalar.NewScalar(10), scalar.NewScalar(12), scalar.NewScalar(11), scalar.NewScalar(13)]
+scalar = scalar.NewScalar(14)
+matrix = [[1, 2], [3, 4]]
+data = [scalar.NewScalar(1), scalar.NewScalar(2), scalar.NewScalar(3)]
+predictions = [scalar.NewScalar(1), scalar.NewScalar(0), scalar.NewScalar(1)]
+targets = [scalar.NewScalar(1), scalar.NewScalar(0), scalar.NewScalar(0)]
+labels = [scalar.NewScalar(1), scalar.NewScalar(0), scalar.NewScalar(1)]
+alpha = 0.1
+window_size = 3
+k = 3
+eps = 0.5
+min_samples = 5
+
+// Calculate the cumulative sum of a list of scalars
+scalar_cum_sum = scalar.CumulativeSum(scalars)
+print("Cumulative Sum:", [s["value"] for s in scalar_cum_sum])
+
+// Calculate the cumulative product of a list of scalars
+scalar_cum_product = scalar.CumulativeProduct(scalars)
+print("Cumulative Product:", [s["value"] for s in scalar_cum_product])
+
+// Calculate the autocorrelation of a list of scalars
+scalar_autocorr = scalar.Autocorrelation(scalars, 1)
+print("Autocorrelation:", scalar_autocorr["value"])
+
+// Calculate the Fourier transform of a list of scalars
+scalar_fourier_transform = scalar.FourierTransform(scalars)
+print("Fourier Transform:", scalar_fourier_transform)
+
+// Calculate the inverse Fourier transform of a list of scalars
+scalar_inverse_fourier_transform = scalar.InverseFourierTransform(scalars)
+print("Inverse Fourier Transform:", scalar_inverse_fourier_transform)
+
+// Perform a principal component analysis (PCA) on a matrix
+scalar_pca = scalar.PrincipalComponentAnalysis(matrix)
+print("PCA:", scalar_pca)
+
+// Perform a singular value decomposition (SVD) on a matrix
+scalar_svd = scalar.SingularValueDecomposition(matrix)
+print("SVD:", scalar_svd)
+
+// Calculate the covariance matrix of a matrix
+scalar_covariance_matrix = scalar.CovarianceMatrix(matrix)
+print("Covariance Matrix:", scalar_covariance_matrix)
+
+// Calculate the correlation matrix of a matrix
+scalar_correlation_matrix = scalar.CorrelationMatrix(matrix)
+print("Correlation Matrix:", scalar_correlation_matrix)
+
+// Perform a clustering analysis using k-means clustering
+scalar_kmeans_clustering = scalar.KMeansClustering(data, k)
+print("K-Means Clustering:", scalar_kmeans_clustering)
+
+// Perform a clustering analysis using hierarchical clustering
+scalar_hierarchical_clustering = scalar.HierarchicalClustering(data)
+print("Hierarchical Clustering:", scalar_hierarchical_clustering)
+
+// Perform a clustering analysis using DBSCAN
+scalar_dbscan_clustering = scalar.DBSCANClustering(data, eps, min_samples)
+print("DBSCAN Clustering:", scalar_dbscan_clustering)
+
+// Calculate the silhouette score for a clustering result
+scalar_silhouette_score = scalar.SilhouetteScore(data, labels)
+print("Silhouette Score:", scalar_silhouette_score["value"])
+
+// Perform a linear discriminant analysis (LDA)
+scalar_lda = scalar.LinearDiscriminantAnalysis(data, labels)
+print("LDA:", scalar_lda)
+
+// Perform a quadratic discriminant analysis (QDA)
+scalar_qda = scalar.QuadraticDiscriminantAnalysis(data, labels)
+print("QDA:", scalar_qda)
+
+// Perform a support vector machine (SVM) classification
+scalar_svm = scalar.SupportVectorMachine(data, labels)
+print("SVM Classification:", scalar_svm)
+
+// Perform a logistic regression classification
+scalar_logistic_regression = scalar.LogisticRegression(data, labels)
+print("Logistic Regression Classification:", scalar_logistic_regression)
+
+// Perform a decision tree classification
+scalar_decision_tree = scalar.DecisionTreeClassification(data, labels)
+print("Decision Tree Classification:", scalar_decision_tree)
+
+// Perform a random forest classification
+scalar_random_forest = scalar.RandomForestClassification(data, labels)
+print("Random Forest Classification:", scalar_random_forest)
+
+// Perform a gradient boosting classification
+scalar_gradient_boosting = scalar.GradientBoostingClassification(data, labels)
+print("Gradient Boosting Classification:", scalar_gradient_boosting)
+
+// Perform a Naive Bayes classification
+scalar_naive_bayes = scalar.NaiveBayesClassification(data, labels)
+print("Naive Bayes Classification:", scalar_naive_bayes)
+
+// Perform an ensemble method for classification
+scalar_ensemble = scalar.EnsembleClassification(data, labels)
+print("Ensemble Classification:", scalar_ensemble)
+
+// Perform cross-validation for a classification model
+scalar_cross_validation = scalar.CrossValidation(data, labels, "model", 5)
+print("Cross Validation:", scalar_cross_validation)
+
+// Calculate the accuracy of a classification model
+scalar_classification_accuracy = scalar.ClassificationAccuracy(predictions, targets)
+print("Classification Accuracy:", scalar_classification_accuracy["value"])
+
+// Calculate the precision of a classification model
+scalar_classification_precision = scalar.ClassificationPrecision(predictions, targets, 1)
+print("Classification Precision:", scalar_classification_precision["value"])
+
+// Calculate the recall of a classification model
+scalar_classification_recall = scalar.ClassificationRecall(predictions, targets, 1)
+print("Classification Recall:", scalar_classification_recall["value"])
+
+// Calculate the F1 score of a classification model
+scalar_classification_f1_score = scalar.ClassificationF1Score(predictions, targets, 1)
+print("Classification F1 Score:", scalar_classification_f1_score["value"])
+
+// Calculate the ROC curve for a classification model
+scalar_roc_curve = scalar.ROC_Curve(predictions, targets)
+print("ROC Curve:", scalar_roc_curve)
+
+// Calculate the AUC (Area Under the Curve) of a ROC curve
+scalar_auc_roc = scalar.AUC_ROC(scalar_roc_curve)
+print("AUC ROC:", scalar_auc_roc)
+
+// Perform feature scaling using Min-Max normalization
+scalar_min_max_norm = scalar.MinMaxNormalization(data)
+print("Min-Max Normalization:", [s["value"] for s in scalar_min_max_norm])
+
+// Perform feature scaling using Z-score normalization
+scalar_z_score_norm = scalar.ZScoreNormalization(data)
+print("Z-Score Normalization:", [s["value"] for s in scalar_z_score_norm])
+
+// Perform a t-distributed Stochastic Neighbor Embedding (t-SNE) dimensionality reduction
+scalar_tsne = scalar.TSNE(data, 2)
+print("t-SNE:", scalar_tsne)
+
+// Perform a uniform manifold approximation and projection (UMAP) dimensionality reduction
+scalar_umap = scalar.UMAP(data, 2)
+print("UMAP:", scalar_umap)
+
+// Calculate the Davies-Bouldin index for clustering
+scalar_davies_bouldin_index = scalar.DaviesBouldinIndex(data, labels)
+print("Davies-Bouldin Index:", scalar_davies_bouldin_index)
+
+// Calculate the Calinski-Harabasz index for clustering
+scalar_calinski_harabasz_index = scalar.CalinskiHarabaszIndex(data, labels)
+print("Calinski-Harabasz Index:", scalar_calinski_harabasz_index)
+
+// Perform a kernel principal component analysis (kPCA) on a matrix
+scalar_kernel_pca = scalar.KernelPCA(matrix, "linear")
+print("Kernel PCA:", scalar_kernel_pca)
+
+// Calculate the Frobenius norm of a matrix
+scalar_frobenius_norm = scalar.FrobeniusNorm(matrix)
+print("Frobenius Norm:", scalar_frobenius_norm["value"])

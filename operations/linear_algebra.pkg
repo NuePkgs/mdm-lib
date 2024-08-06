@@ -1,0 +1,300 @@
+// Vector Operations
+
+// Vector Addition
+void VectorAdd(v1, v2) {
+    if (type(v1) == "ARRAY" && type(v2) == "ARRAY" && len(v1) == len(v2)) {
+        let result = []
+        for (i = 0; i < len(v1); i++) {
+            result[i] = v1[i] + v2[i]
+        }
+        return result
+    } else {
+        throw "Unsupported types or dimensions for vector addition"
+    }
+}
+
+// Vector Subtraction
+void VectorSubtract(v1, v2) {
+    if (type(v1) == "ARRAY" && type(v2) == "ARRAY" && len(v1) == len(v2)) {
+        let result = []
+        for (i = 0; i < len(v1); i++) {
+            result[i] = v1[i] - v2[i]
+        }
+        return result
+    }
+    throw "Unsupported types or dimensions for vector subtraction"
+}
+
+// Vector Dot Product
+void VectorDotProduct(v1, v2) {
+    if (type(v1) == "ARRAY" && type(v2) == "ARRAY" && len(v1) == len(v2)) {
+        let dotProduct = 0
+        for (i = 0; i < len(v1); i++) {
+            dotProduct += v1[i] * v2[i]
+        }
+        return dotProduct
+    }
+    throw "Unsupported types or dimensions for vector dot product"
+}
+
+// Vector Magnitude
+void VectorMagnitude(v) {
+    if (type(v) == "ARRAY") {
+        let sumSquares = 0
+        for (i = 0; i < len(v); i++) {
+            sumSquares += v[i]^2
+        }
+        return math.Sqrt(sumSquares)
+    }
+    throw "Unsupported type for vector magnitude"
+}
+
+// Matrix Operations
+
+// Matrix Addition
+void MatrixAdd(m1, m2) {
+    if (type(m1) == "ARRAY" && type(m2) == "ARRAY" &&
+        len(m1) == len(m2) && len(m1[0]) == len(m2[0])) {
+        let result = [[]]
+        for (i = 0; i < len(m1); i++) {
+            for (j = 0; j < len(m1[0]); j++) {
+                result[i][j] = m1[i][j] + m2[i][j]
+            }
+        }
+        return result
+    }
+    throw "Unsupported types or dimensions for matrix addition"
+}
+
+// Matrix Subtraction
+void MatrixSubtract(m1, m2) {
+    if (type(m1) == "ARRAY" && type(m2) == "ARRAY" &&
+        len(m1) == len(m2) && len(m1[0]) == len(m2[0])) {
+        let result[len(m1)][len(m1[0])]
+        for (i = 0; i < len(m1); i++) {
+            for (j = 0; j < len(m1[0]); j++) {
+                result[i][j] = m1[i][j] - m2[i][j]
+            }
+        }
+        return result
+    }
+    throw "Unsupported types or dimensions for matrix subtraction"
+}
+
+// Matrix Multiplication
+void MatrixMultiply(m1, m2) {
+    if (type(m1) == "ARRAY" && type(m2) == "ARRAY" &&
+        len(m1[0]) == len(m2)) {
+        let result[len(m1)][len(m2[0])]
+        for (i = 0; i < len(m1); i++) {
+            for (j = 0; j < len(m2[0]); j++) {
+                let sum = 0
+                for (k = 0; k < len(m2); k++) {
+                    sum += m1[i][k] * m2[k][j]
+                }
+                result[i][j] = sum
+            }
+        }
+        return result
+    }
+    throw "Unsupported types or dimensions for matrix multiplication"
+}
+
+// Matrix Transpose
+void MatrixTranspose(m) {
+    if (type(m) == "ARRAY") {
+        let result[len(m[0])][len(m)]
+        for (i = 0; i < len(m); i++) {
+            for (j = 0; j < len(m[0]); j++) {
+                result[j][i] = m[i][j]
+            }
+        }
+        return result
+    }
+    throw "Unsupported type for matrix transpose"
+}
+
+// Matrix Determinant (2x2 Matrix)
+void MatrixDeterminant2x2(m) {
+    if (type(m) == "ARRAY" && len(m) == 2 && len(m[0]) == 2) {
+        return m[0][0] * m[1][1] - m[0][1] * m[1][0]
+    }
+    throw "Unsupported type or dimensions for 2x2 matrix determinant"
+}
+
+// Matrix Determinant (3x3 Matrix)
+void MatrixDeterminant3x3(m) {
+    if (type(m) == "ARRAY" && len(m) == 3 && len(m[0]) == 3) {
+        return m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+               m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+               m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0])
+    }
+    throw "Unsupported type or dimensions for 3x3 matrix determinant"
+}
+
+// Matrix Inverse (2x2 Matrix)
+void MatrixInverse2x2(m) {
+    if (type(m) == "ARRAY" && len(m) == 2 && len(m[0]) == 2) {
+        let det = MatrixDeterminant2x2(m)
+        if (det != 0) {
+            return [[m[1][1] / det, -m[0][1] / det], [-m[1][0] / det, m[0][0] / det]]
+        }
+        throw "Matrix is singular and cannot be inverted"
+    }
+    throw "Unsupported type or dimensions for 2x2 matrix inverse"
+}
+
+// Matrix Inverse (3x3 Matrix)
+void MatrixInverse3x3(m) {
+    if (type(m) == "ARRAY" && len(m) == 3 && len(m[0]) == 3) {
+        let det = MatrixDeterminant3x3(m)
+        if (det != 0) {
+            // Calculate matrix of minors
+            let minors[3][3]
+            minors[0][0] = MatrixDeterminant2x2([[m[1][1], m[1][2]], [m[2][1], m[2][2]]])
+            minors[0][1] = MatrixDeterminant2x2([[m[1][0], m[1][2]], [m[2][0], m[2][2]]])
+            minors[0][2] = MatrixDeterminant2x2([[m[1][0], m[1][1]], [m[2][0], m[2][1]]])
+            minors[1][0] = MatrixDeterminant2x2([[m[0][1], m[0][2]], [m[2][1], m[2][2]]])
+            minors[1][1] = MatrixDeterminant2x2([[m[0][0], m[0][2]], [m[2][0], m[2][2]]])
+            minors[1][2] = MatrixDeterminant2x2([[m[0][0], m[0][1]], [m[2][0], m[2][1]]])
+            minors[2][0] = MatrixDeterminant2x2([[m[0][1], m[0][2]], [m[1][1], m[1][2]]])
+            minors[2][1] = MatrixDeterminant2x2([[m[0][0], m[0][2]], [m[1][0], m[1][2]]])
+            minors[2][2] = MatrixDeterminant2x2([[m[0][0], m[0][1]], [m[1][0], m[1][1]]])
+            
+            // Calculate matrix of cofactors
+            // Initialize cofactors matrix
+            let cofactors = [];
+            for (i = 0; i < 3; i++) {
+                cofactors[i] = []; // Ensure each row is initialized
+                for (j = 0; j < 3; j++) {
+                    // Compute the sign based on the position (i, j)
+                    let sign = ((i + j) % 2) * 2 - 1;
+                    cofactors[i][j] = minors[i][j] * sign;
+                }
+            }
+
+            
+            // Transpose of cofactor matrix
+            let cofactorTranspose[3][3]
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 3; j++) {
+                    cofactorTranspose[i][j] = cofactors[j][i]
+                }
+            }
+            
+            // Inverse matrix
+            let inverse[3][3]
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 3; j++) {
+                    inverse[i][j] = cofactorTranspose[i][j] / det
+                }
+            }
+            return inverse
+        }
+        throw "Matrix is singular and cannot be inverted"
+    }
+    throw "Unsupported type or dimensions for 3x3 matrix inverse"
+}
+
+// Matrix Trace
+void MatrixTrace(m) {
+    if (type(m) == "ARRAY") {
+        let trace = 0
+        for (i = 0; i < len(m) && i < len(m[0]); i++) {
+            trace += m[i][i]
+        }
+        return trace
+    }
+    throw "Unsupported type for matrix trace"
+}
+
+void Example() {
+    // Usage Examples
+
+    console.Println("Addition")
+
+    // Vector Addition
+    let v1 = [1, 2, 3]
+    let v2 = [4, 5, 6]
+    println(VectorAdd(v1, v2))  // Output: [5, 7, 9]
+
+    console.Println("Subtraction")
+
+    // Vector Subtraction
+    let v1 = [4, 5, 6]
+    let v2 = [1, 2, 3]
+    println(VectorSubtract(v1, v2))  // Output: [3, 3, 3]
+
+    console.Println("Dot Product")
+
+    // Vector Dot Product
+    let v1 = [1, 2, 3]
+    let v2 = [4, 5, 6]
+    println(VectorDotProduct(v1, v2))  // Output: 32
+
+    console.Println("Magnitude")
+
+    // Vector Magnitude
+    let v = [3, 4]
+    println(VectorMagnitude(v))  // Output: 5
+
+    console.Println("Matrix Addition")
+
+    // Matrix Addition
+    let m1 = [[1, 2], [3, 4]]
+    let m2 = [[5, 6], [7, 8]]
+    println(MatrixAdd(m1, m2))  // Output: [[6, 8], [10, 12]]
+
+    console.Println("Matrix Subtraction")
+
+    // Matrix Subtraction
+    let m1 = [[5, 6], [7, 8]]
+    let m2 = [[1, 2], [3, 4]]
+    println(MatrixSubtract(m1, m2))  // Output: [[4, 4], [4, 4]]
+
+    console.Println("Matrix Multiplication")
+
+    // Matrix Multiplication
+    let m1 = [[1, 2], [3, 4]]
+    let m2 = [[5, 6], [7, 8]]
+    println(MatrixMultiply(m1, m2))  // Output: [[19, 22], [43, 50]]
+
+    console.Println("Matrix Transpose")
+
+    // Matrix Transpose
+    let m = [[1, 2, 3], [4, 5, 6]]
+    println(MatrixTranspose(m))  // Output: [[1, 4], [2, 5], [3, 6]]
+
+    console.Println("Matrix Determinant (2x2 Matrix)")
+
+    // Matrix Determinant (2x2 Matrix)
+    let m = [[1, 2], [3, 4]]
+    println(MatrixDeterminant2x2(m))  // Output: -2
+
+    console.Println("Matrix Determinant (3x3 Matrix)")
+
+
+    // Matrix Determinant (3x3 Matrix)
+    let m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    println(MatrixDeterminant3x3(m))  // Output: 0
+
+    console.Println("Matrix Inverse (2x2 Matrix)")
+
+    // Matrix Inverse (2x2 Matrix)
+    let m = [[1, 2], [3, 4]]
+    println(MatrixInverse2x2(m))  // Output: [[-2, 1], [1.5, -0.5]]
+
+    console.Println("Matrix Inverse (3x3 Matrix) :: Needs A Small Fix")
+
+    // Matrix Inverse (3x3 Matrix)
+    let m = [[1, 2, 3], [0, 1, 4], [5, 6, 0]]
+    //println(MatrixInverse3x3(m))  // Output: [[-24, 18, 5], [20, -15, -4], [-5, 4, 1]]
+
+    console.Println("Matrix Trace")
+
+    // Matrix Trace
+    let m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    println(MatrixTrace(m))  // Output: 15
+}
+
+//Example();

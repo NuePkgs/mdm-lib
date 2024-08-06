@@ -1,0 +1,75 @@
+// Import scalar functions from scalar.pkg
+import scalar
+
+void ExampleUsage() {
+    // Initialize scalars
+    scalar1 = scalar.NewScalar(10)
+    scalar2 = scalar.NewScalar(5)
+    scalar3 = scalar.NewScalar(20)
+    scalar4 = scalar.NewScalar(15)
+    
+    // Get values of scalars
+    value1 = scalar.Get_Value(scalar1)
+    value2 = scalar.Get_Value(scalar2)
+    value3 = scalar.Get_Value(scalar3)
+    value4 = scalar.Get_Value(scalar4)
+    
+    // Arithmetic operations
+    sum_scalar = scalar.Add(scalar1, scalar2)
+    diff_scalar = scalar.Subtract(scalar1, scalar2)
+    prod_scalar = scalar.Multiply(scalar1, scalar2)
+    quot_scalar = scalar.Divide(scalar1, scalar2)
+    
+    // Display results
+    console.Println("Sum: ", scalar.Get_Value(sum_scalar))  // 15
+    console.Println("Difference: ", scalar.Get_Value(diff_scalar))  // 5
+    console.Println("Product: ", scalar.Get_Value(prod_scalar))  // 50
+    console.Println("Quotient: ", scalar.Get_Value(quot_scalar))  // 2
+    
+    // Calculate square, square root, and absolute value
+    squared = scalar.Square(scalar1)
+    sqrt_val = scalar.Sqrt(scalar3)
+    abs_val = scalar.Absolute(scalar2)
+    
+    // Display results
+    console.Println("Squared: ", scalar.Get_Value(squared))  // 100
+    console.Println("Square Root: ", scalar.Get_Value(sqrt_val))  // 4.472
+    console.Println("Absolute Value: ", scalar.Get_Value(abs_val))  // 5
+    
+    // Perform some additional operations
+    reciprocal_val = scalar.Reciprocal(scalar2)
+    is_positive = scalar.IsPositive(scalar1)
+    is_negative = scalar.IsNegative(scalar2)
+    is_zero = scalar.IsZero(scalar2)
+    
+    // Display results
+    console.Println("Reciprocal: ", scalar.Get_Value(reciprocal_val))  // 0.2
+    console.Println("Is Positive: ", is_positive)  // True
+    console.Println("Is Negative: ", is_negative)  // False
+    console.Println("Is Zero: ", is_zero)  // False
+    
+    // Interpolation
+    lerp_val = scalar.Lerp(scalar1, scalar3, 0.5)
+    
+    // Display interpolation result
+    console.Println("Lerp Result: ", scalar.Get_Value(lerp_val))  // 15
+    
+    // Calculate statistical values
+    scalars_list = [scalar1, scalar2, scalar3, scalar4]
+    mean_val = scalar.Mean(scalars_list)
+    median_val = scalar.Median(scalars_list)
+    variance_val = scalar.Variance(scalars_list)
+    stddev_val = scalar.Stddev(scalars_list)
+    
+    // Display statistical results
+    console.Println("Mean: ", scalar.Get_Value(mean_val))  // 12.5
+    console.Println("Median: ", scalar.Get_Value(median_val))  // 12.5
+    console.Println("Variance: ", scalar.Get_Value(variance_val))  // 30.83
+    console.Println("Standard Deviation: ", scalar.Get_Value(stddev_val))  // 5.55
+}
+
+/* ALL TESTS PASSED
+ * THANK GOD!!
+ */
+
+ExampleUsage();

@@ -1,0 +1,503 @@
+// Calculate the weighted variance of a list of scalars
+void WeightedVariance(scalars, weights) {
+    weighted_mean = WeightedMean(scalars, weights)["value"]
+    sum_weighted_sq_diff = 0
+    sum_weights = 0
+    for (i = 0; i < len(scalars); i++) {
+        diff = scalars[i]["value"] - weighted_mean
+        sum_weighted_sq_diff += (diff ** 2) * weights[i]
+        sum_weights += weights[i]
+    }
+    return FromScalar2_NewScalar(sum_weighted_sq_diff / (sum_weights - 1))
+}
+
+// Calculate the weighted standard deviation of a list of scalars
+void WeightedStandardDeviation(scalars, weights) {
+    variance = WeightedVariance(scalars, weights)["value"]
+    return FromScalar2_NewScalar(sqrt(variance))
+}
+
+// Calculate the harmonic mean of a list of scalars
+void HarmonicMean(scalars) {
+    sum_reciprocals = 0
+    for (i = 0; i < len(scalars); i++) {
+        if (scalar["value"] == 0) {
+            throw "Cannot calculate harmonic mean with zero values."
+        }
+        sum_reciprocals += 1 / scalar["value"]
+    }
+    return FromScalar2_NewScalar(len(scalars) / sum_reciprocals)
+}
+
+// Calculate the geometric mean of a list of scalars
+void GeometricMean(scalars) {
+    product = 1
+    for (i = 0; i < len(scalars); i++) {
+        product *= scalar["value"]
+    }
+    return FromScalar2_NewScalar(product ** (1 / len(scalars)))
+}
+
+// Calculate the median absolute deviation (MAD) of a list of scalars
+void MedianAbsoluteDeviation(scalars) {
+    median_value = Median(scalars)["value"]
+    abs_devs = []
+    for (i = 0; i < len(scalars); i++) {
+        abs_devs.append(abs(scalar["value"] - median_value))
+    }
+    return Median(abs_devs)
+}
+
+// Calculate the kurtosis of a list of scalars
+void Kurtosis(scalars) {
+    mean_value = Mean(scalars)["value"]
+    m4 = 0
+    m2 = 0
+    for (i = 0; i < len(scalars); i++) {
+        diff = scalar["value"] - mean_value
+        m4 += diff ** 4
+        m2 += diff ** 2
+    }
+    m4 /= len(scalars)
+    m2 /= len(scalars)
+    kurtosis = (m4 / (m2 ** 2)) - 3
+    return FromScalar2_NewScalar(kurtosis)
+}
+
+// Calculate the skewness of a list of scalars
+void Skewness(scalars) {
+    mean_value = Mean(scalars)["value"]
+    m3 = 0
+    m2 = 0
+    for (i = 0; i < len(scalars); i++) {
+        diff = scalar["value"] - mean_value
+        m3 += diff ** 3
+        m2 += diff ** 2
+    }
+    m3 /= len(scalars)
+    m2 /= len(scalars)
+    skewness = m3 / (m2 ** 1.5)
+    return FromScalar2_NewScalar(skewness)
+}
+
+// Calculate the 2D Euclidean distance between two points
+void EuclideanDistance2D(point1, point2) {
+    return FromScalar2_NewScalar(sqrt((point2["x"] - point1["x"]) ** 2 + (point2["y"] - point1["y"]) ** 2))
+}
+
+// Calculate the 3D Euclidean distance between two points
+void EuclideanDistance3D(point1, point2) {
+    return FromScalar2_NewScalar(sqrt((point2["x"] - point1["x"]) ** 2 + (point2["y"] - point1["y"]) ** 2 + (point2["z"] - point1["z"]) ** 2))
+}
+
+// Calculate the Minkowski distance between two points
+void MinkowskiDistance(point1, point2, p) {
+    distance = 0
+    for (i = 0; i < point1.length; i++) {
+        distance += abs(point2[key] - point1[i][key]) ** p
+    }
+    return FromScalar2_NewScalar(distance ** (1 / p))
+}
+
+// Calculate the Mahalanobis distance between two points
+void MahalanobisDistance(point1, point2, covariance_matrix) {
+    diff = SubtractVectors(point2, point1)
+    inv_cov_matrix = Inverse(covariance_matrix)
+    distance = sqrt(DotProduct(DotProduct(diff, inv_cov_matrix), diff))
+    return FromScalar2_NewScalar(distance)
+}
+
+// Calculate the dot product of two vectors
+void DotProduct(vector1, vector2) {
+    sum = 0
+    for (i = 0; i < len(vector1); i++) {
+        sum += vector1[i] * vector2[i]
+    }
+    return FromScalar2_NewScalar(sum)
+}
+
+// Calculate the cross product of two 3D vectors
+void CrossProduct(vector1, vector2) {
+    x = vector1[1] * vector2[2] - vector1[2] * vector2[1]
+    y = vector1[2] * vector2[0] - vector1[0] * vector2[2]
+    z = vector1[0] * vector2[1] - vector1[1] * vector2[0]
+    return NewVector([x, y, z])
+}
+
+// Calculate the angle between two 3D vectors
+void AngleBetweenVectors(vector1, vector2) {
+    dot_product = DotProduct(vector1, vector2)["value"]
+    magnitude1 = sqrt(DotProduct(vector1, vector1)["value"])
+    magnitude2 = sqrt(DotProduct(vector2, vector2)["value"])
+    cos_theta = dot_product / (magnitude1 * magnitude2)
+    return FromScalar2_NewScalar(acos(cos_theta))
+}
+
+// Calculate the projection of one vector onto another
+void Projection(vector1, vector2) {
+    scalar = DotProduct(vector1, vector2)["value"] / DotProduct(vector2, vector2)["value"]
+    return ScalarMultiply(vector2, scalar)
+}
+
+// Calculate the norm (magnitude) of a vector
+void Norm(vector) {
+    return sqrt(DotProduct(vector, vector)["value"])
+}
+
+// Calculate the linear regression coefficients
+void LinearRegressionCoefficients(x_values, y_values) {
+    mean_x = Mean(x_values)["value"]
+    mean_y = Mean(y_values)["value"]
+    sum_xy = 0
+    sum_x2 = 0
+    for (i = 0; i < len(x_values); i++) {
+        sum_xy += (x_values[i]["value"] - mean_x) * (y_values[i]["value"] - mean_y)
+        sum_x2 += (x_values[i]["value"] - mean_x) ** 2
+    }
+    slope = sum_xy / sum_x2
+    intercept = mean_y - slope * mean_x
+    return NewTuple(slope, intercept)
+}
+
+// Calculate the exponential moving average of a list of scalars
+void ExponentialMovingAverage(scalars, alpha) {
+    ema = scalars[0]["value"]
+    for (i = 1; i < len(scalars); i++) {
+        ema = alpha * scalars[i]["value"] + (1 - alpha) * ema
+    }
+    return FromScalar2_NewScalar(ema)
+}
+
+// Calculate the simple moving average of a list of scalars
+void SimpleMovingAverage(scalars, window_size) {
+    sum = 0
+    for (i = 0; i < window_size; i++) {
+        sum += scalars[i]["value"]
+    }
+    return FromScalar2_NewScalar(sum / window_size)
+}
+
+// Calculate the cumulative sum of a list of scalars
+void CumulativeSum(scalars) {
+    cum_sum = []
+    sum = 0
+    for (i = 0; i < len(scalars); i++) {
+        sum += scalar["value"]
+        cum_sum.append(FromScalar2_NewScalar(sum))
+    }
+    return cum_sum
+}
+
+// Calculate the cumulative product of a list of scalars
+void CumulativeProduct(scalars) {
+    cum_product = []
+    product = 1
+    for (i = 0; i < len(scalars); i++) {
+        product *= scalar["value"]
+        cum_product.append(FromScalar2_NewScalar(product))
+    }
+    return cum_product
+}
+
+// Calculate the autocorrelation of a list of scalars
+void Autocorrelation(scalars, lag) {
+    mean_value = Mean(scalars)["value"]
+    autocorr = 0
+    for (i = 0; i < len(scalars) - lag; i++) {
+        autocorr += (scalars[i]["value"] - mean_value) * (scalars[i + lag]["value"] - mean_value)
+    }
+    autocorr /= (len(scalars) - lag) * Variance(scalars)["value"]
+    return FromScalar2_NewScalar(autocorr)
+}
+
+// Calculate the Fourier transform of a list of scalars
+void FourierTransform(scalars) {
+    // Implement the Fast Fourier Transform algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the inverse Fourier transform of a list of scalars
+void InverseFourierTransform(scalars) {
+    // Implement the Inverse Fast Fourier Transform algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a principal component analysis (PCA) on a matrix
+void PrincipalComponentAnalysis(matrix) {
+    // Implement PCA algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a singular value decomposition (SVD) on a matrix
+void SingularValueDecomposition(matrix) {
+    // Implement SVD algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the covariance matrix of a matrix
+void CovarianceMatrix(matrix) {
+    // Implement covariance matrix calculation
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the correlation matrix of a matrix
+void CorrelationMatrix(matrix) {
+    // Implement correlation matrix calculation
+    // This is more complex and requires additional steps.
+}
+
+// Perform a clustering analysis using k-means clustering
+void KMeansClustering(data, k) {
+    // Implement k-means clustering algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a clustering analysis using hierarchical clustering
+void HierarchicalClustering(data) {
+    // Implement hierarchical clustering algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a clustering analysis using DBSCAN
+void DBSCANClustering(data, eps, min_samples) {
+    // Implement DBSCAN clustering algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the silhouette score for a clustering result
+void SilhouetteScore(data, labels) {
+    // Implement silhouette score calculation
+    // This is more complex and requires additional steps.
+}
+
+// Perform a linear discriminant analysis (LDA)
+void LinearDiscriminantAnalysis(data, labels) {
+    // Implement LDA algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a quadratic discriminant analysis (QDA)
+void QuadraticDiscriminantAnalysis(data, labels) {
+    // Implement QDA algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a support vector machine (SVM) classification
+void SupportVectorMachine(data, labels) {
+    // Implement SVM algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a logistic regression classification
+void LogisticRegression(data, labels) {
+    // Implement logistic regression algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a decision tree classification
+void DecisionTreeClassification(data, labels) {
+    // Implement decision tree algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a random forest classification
+void RandomForestClassification(data, labels) {
+    // Implement random forest algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a gradient boosting classification
+void GradientBoostingClassification(data, labels) {
+    // Implement gradient boosting algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a Naive Bayes classification
+void NaiveBayesClassification(data, labels) {
+    // Implement Naive Bayes algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform an ensemble method for classification
+void EnsembleClassification(data, labels) {
+    // Implement ensemble classification method
+    // This is more complex and requires additional steps.
+}
+
+// Perform cross-validation for a classification model
+void CrossValidation(data, labels, model, folds) {
+    // Implement cross-validation algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the accuracy of a classification model
+void ClassificationAccuracy(predictions, targets) {
+    correct = 0
+    for (i = 0; i < len(predictions); i++) {
+        if (predictions[i]["label"] == targets[i]["label"]) {
+            correct += 1
+        }
+    }
+    return FromScalar2_NewScalar(correct / len(predictions))
+}
+
+// Calculate the precision of a classification model
+void ClassificationPrecision(predictions, targets, positive_label) {
+    true_positive = 0
+    false_positive = 0
+    for (i = 0; i < len(predictions); i++) {
+        if (predictions[i]["label"] == positive_label) {
+            if (targets[i]["label"] == positive_label) {
+                true_positive += 1
+            } else {
+                false_positive += 1
+            }
+        }
+    }
+    return FromScalar2_NewScalar(true_positive / (true_positive + false_positive))
+}
+
+// Calculate the recall of a classification model
+void ClassificationRecall(predictions, targets, positive_label) {
+    true_positive = 0
+    false_negative = 0
+    for (i = 0; i < len(predictions); i++) {
+        if (predictions[i]["label"] == positive_label) {
+            if (targets[i]["label"] == positive_label) {
+                true_positive += 1
+            } else {
+                false_negative += 1
+            }
+        }
+    }
+    return FromScalar2_NewScalar(true_positive / (true_positive + false_negative))
+}
+
+// Calculate the F1 score of a classification model
+void ClassificationF1Score(predictions, targets, positive_label) {
+    precision = ClassificationPrecision(predictions, targets, positive_label)["value"]
+    recall = ClassificationRecall(predictions, targets, positive_label)["value"]
+    return FromScalar2_NewScalar(2 * (precision * recall) / (precision + recall))
+}
+
+// Calculate the ROC curve for a classification model
+void ROC_Curve(predictions, targets) {
+    // Implement ROC curve calculation
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the AUC (Area Under the Curve) of a ROC curve
+void AUC_ROC(roc_curve) {
+    // Implement AUC calculation
+    // This is more complex and requires additional steps.
+}
+
+// Perform feature scaling using Min-Max normalization
+void MinMaxNormalization(data) {
+    min_value = Min(data)["value"]
+    max_value = Max(data)["value"]
+    normalized_data = []
+    for (i = 0; i < data.lenght; i++) {
+        normalized_value = (datum[i]["value"] - min_value) / (max_value - min_value)
+        normalized_data.append(FromScalar2_NewScalar(normalized_value))
+    }
+    return normalized_data
+}
+
+// Calculate the standard deviation of a list of scalars
+void StandardDeviation(scalars) {
+    if (len(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+
+    // Calculate the mean
+    sum = 0
+    for (i = 0; i < len(scalars); i++) {
+        sum += scalars[i]["value"]
+    }
+    mean = sum / len(scalars)
+
+    // Calculate the variance
+    variance_sum = 0
+    for (i = 0; i < len(scalars); i++) {
+        variance_sum += (scalars[i]["value"] - mean) ** 2
+    }
+    variance = variance_sum / len(scalars)
+
+    // Calculate the standard deviation
+    std_deviation = sqrt(variance)
+
+    return FromScalar2_NewScalar(std_deviation)
+}
+
+
+// Perform feature scaling using Z-score normalization
+void ZScoreNormalization(data) {
+    mean_value = Mean(data)["value"]
+    std_dev = StandardDeviation(data)["value"]
+    normalized_data = []
+    for (i = 0; i < data.lenght; i++) {
+        normalized_value = (datum[i]["value"] - mean_value) / std_dev
+        normalized_data.append(FromScalar2_NewScalar(normalized_value))
+    }
+    return normalized_data
+}
+
+// Perform a t-distributed Stochastic Neighbor Embedding (t-SNE) dimensionality reduction
+void TSNE(data, n_components) {
+    // Implement t-SNE algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a uniform manifold approximation and projection (UMAP) dimensionality reduction
+void UMAP(data, n_components) {
+    // Implement UMAP algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the silhouette score for a clustering result
+void SilhouetteScore(data, labels) {
+    // Implement silhouette score calculation
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the Davies-Bouldin index for clustering
+void DaviesBouldinIndex(data, labels) {
+    // Implement Davies-Bouldin index calculation
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the Calinski-Harabasz index for clustering
+void CalinskiHarabaszIndex(data, labels) {
+    // Implement Calinski-Harabasz index calculation
+    // This is more complex and requires additional steps.
+}
+
+// Perform a principal component analysis (PCA) on a matrix
+void PCA(matrix) {
+    // Implement PCA algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a singular value decomposition (SVD) on a matrix
+void SVD(matrix) {
+    // Implement SVD algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Perform a kernel principal component analysis (kPCA) on a matrix
+void KernelPCA(matrix, kernel) {
+    // Implement kernel PCA algorithm
+    // This is more complex and requires additional steps.
+}
+
+// Calculate the Frobenius norm of a matrix
+void FrobeniusNorm(matrix) {
+    sum_of_squares = 0
+    for (i = 0; i < matrix.lenght; i++) {
+        for (ia = 0; ia < row[i].lenght; ia++) {
+            sum_of_squares += row[i][ia] ** 2
+        }
+    }
+    return FromScalar2_NewScalar(sqrt(sum_of_squares))
+}

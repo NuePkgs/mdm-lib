@@ -1,0 +1,68 @@
+// 4D Geometric Shapes
+
+// 4D Sphere Operations
+void 4DSphereVolume(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return (1/2) * 3.141592653589793^2 * radius^4
+    }
+    throw "Unsupported type for 4D sphere volume"
+}
+
+void 4DSphereSurfaceArea(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return 2 * 3.141592653589793^2 * radius^3
+    }
+    throw "Unsupported type for 4D sphere surface area"
+}
+
+// 4D Hypercube Operations
+void HypercubeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return side^4
+    }
+    throw "Unsupported type for hypercube volume"
+}
+
+void HypercubeSurfaceArea(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return 2 * side^3
+    }
+    throw "Unsupported type for hypercube surface area"
+}
+
+// 4D Cross Polytope Operations
+void CrossPolytopeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return (2 * sqrt(2)^4) / 24 * side^4
+    }
+    throw "Unsupported type for cross polytope volume"
+}
+
+void CrossPolytopeSurfaceArea(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return 2 * sqrt(2)^3 * side^3
+    }
+    throw "Unsupported type for cross polytope surface area"
+}
+
+// 4D Simplex Operations
+void SimplexVolume(a, b, c, d) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER") {
+        return (1/24) * sqrt((a^2 + b^2 + c^2 + d^2) * (a^2 * b^2 + b^2 * c^2 + c^2 * d^2 + d^2 * a^2 - (a^4 + b^4 + c^4 + d^4)))
+    }
+    throw "Unsupported types for simplex volume"
+}
+
+void SimplexSurfaceArea(a, b, c, d) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER") {
+        // Surface area calculation requires more advanced techniques
+        throw "Unsupported types for simplex surface area"
+    }
+    throw "Unsupported types for simplex surface area"
+}

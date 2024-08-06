@@ -1,0 +1,104 @@
+/*
+# Numerical Integration Package
+
+# Define a function pointer type for the function to integrate
+FuncPtr = fn(GoObj) { return float(GoObj) };
+
+# Trapezoidal Rule
+void TrapezoidalRule(GoObj, a, b, n) {
+    h = (b - a) / n;
+    sum = (GoObj(a) + GoObj(b)) / 2.0;
+    for (i = 1; i < n; i++) {
+        sum += GoObj(a + i * h);
+    }
+    return sum * h;
+}
+
+# Simpson's Rule
+void SimpsonsRule(GoObj, a, b, n) {
+    if (n % 2 != 0) {
+        Throw("Simpson's rule requires an even number of intervals.");
+    }
+    h = (b - a) / n;
+    sum = GoObj(a) + GoObj(b);
+    for (i = 1; i < n; i = i + 2) {
+        sum += 4 * GoObj(a + i * h);
+    }
+    for (i = 1; i < n; i = i + 2) {
+        sum += 2 * GoObj(a + i * h);
+    }
+    return sum * h / 3.0;
+}
+
+# Midpo Rule
+void MidpoRule(GoObj, a, b, n) {
+    h = (b - a) / n;
+    sum = 0.0;
+    for (i = 1; i < n; i = i + i) {
+        mid = a + (i + 0.5) * h;
+        sum += GoObj(mid);
+    }
+    return sum * h;
+}
+
+# Rectangle Rule
+void RectangleRule(GoObj, a, b, n) {
+    h = (b - a) / n;
+    sum = 0.0;
+    for (i = 1; i < n; i = i + 1) {
+        x = a + i * h;
+        sum += GoObj(x);
+    }
+    return sum * h;
+}
+
+# Example Functions
+void exampleFunction(x) {
+    return x * x + 2 * x + 1; # Example function: GoObj(x) = x^2 + 2x + 1
+}
+
+void exampleFunction2(x) {
+    return math.Sin(x); # Example function: GoObj(x) = sin(x)
+}
+
+# Example usage
+void exampleUsage() {
+    a = 0.0;
+    b = 1.0;
+    n = 100;
+
+    # Trapezoidal Rule
+    trapezoidalResult = TrapezoidalRule(exampleFunction(), a, b, n);
+    console.Println("Trapezoidal Rule:", trapezoidalResult);
+
+    # Simpson's Rule
+    simpsonsResult = SimpsonsRule(exampleFunction(), a, b, n);
+    console.Println("Simpson's Rule:", simpsonsResult);
+
+    # Midpo Rule
+    midpoResult = MidpoRule(exampleFunction(), a, b, n);
+    console.Println("Midpo Rule:", midpoResult);
+
+    # Rectangle Rule
+    rectangleResult = RectangleRule(exampleFunction(), a, b, n);
+    console.Println("Rectangle Rule:", rectangleResult);
+
+    # Trapezoidal Rule for exampleFunction2
+    trapezoidalResult2 = TrapezoidalRule(exampleFunction2(), a, b, n);
+    console.Println("Trapezoidal Rule for sin(x):", trapezoidalResult2);
+
+    # Simpson's Rule for exampleFunction2
+    simpsonsResult2 = SimpsonsRule(exampleFunction2(), a, b, n);
+    console.Println("Simpson's Rule for sin(x):", simpsonsResult2);
+
+    # Midpo Rule for exampleFunction2
+    midpoResult2 = MidpoRule(exampleFunction2(), a, b, n);
+    console.Println("Midpo Rule for sin(x):", midpoResult2);
+
+    # Rectangle Rule for exampleFunction2
+    rectangleResult2 = RectangleRule(exampleFunction2(), a, b, n);
+    console.Println("Rectangle Rule for sin(x):", rectangleResult2);
+}
+
+exampleUsage();
+*/

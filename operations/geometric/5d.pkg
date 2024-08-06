@@ -1,0 +1,49 @@
+// 5D Geometric Shapes
+
+// 5D Hypercube Operations
+void HypercubeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return side^5
+    }
+    throw "Unsupported type for 5D hypercube volume"
+}
+
+void HypercubeSurfaceArea(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return 5 * side^4
+    }
+    throw "Unsupported type for 5D hypercube surface area"
+}
+
+// 5D Simplex Operations
+void SimplexVolume(a, b, c, d, e) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER" &&
+        type(e) == "FLOAT" || type(e) == "INTEGER") {
+        return (1/120) * sqrt((a^2 + b^2 + c^2 + d^2 + e^2) * (a^2 * b^2 * c^2 + b^2 * c^2 * d^2 + c^2 * d^2 * e^2 + d^2 * e^2 * a^2 + e^2 * a^2 * b^2 - (a^4 + b^4 + c^4 + d^4 + e^4)))
+    }
+    throw "Unsupported types for 5D simplex volume"
+}
+
+// 5D Cross Polytope Operations
+void CrossPolytopeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return (2 * sqrt(5)^5) / 120 * side^5
+    }
+    throw "Unsupported type for 5D cross polytope volume"
+}
+
+// 5D Simplex Surface Area
+void SimplexSurfaceArea(a, b, c, d, e) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER" &&
+        type(e) == "FLOAT" || type(e) == "INTEGER") {
+        // Surface area calculation for 5D simplex is complex and not easily defined
+        throw "Unsupported types for 5D simplex surface area"
+    }
+    throw "Unsupported types for 5D simplex surface area"
+}

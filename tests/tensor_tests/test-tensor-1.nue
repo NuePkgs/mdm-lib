@@ -1,0 +1,151 @@
+import tensor
+//import math  # For some mathematical operations
+
+# Basic Tensor Creation and Information
+console.Println("Basic Tensor Creation and Information:")
+
+# Create a new tensor
+t1 = tensor.NewTensor([2, 3], [1, 2, 3, 4, 5, 6])
+console.Println("New Tensor:", tensor.ToString(t1))
+
+# Check if a value is a tensor
+console.Println("Is t1 a tensor?", tensor.IsTensor(t1))
+console.Println("Is [1,2,3] a tensor?", tensor.IsTensor([1,2,3]))
+
+# Get shape and values
+console.Println("Shape of t1:", tensor.GetShape(t1))
+console.Println("Values of t1:", tensor.GetValues(t1))
+
+# Basic Operations
+console.Println("\nBasic Operations:")
+
+t2 = tensor.NewTensor([2, 3], [7, 8, 9, 10, 11, 12])
+
+console.Println("t1 + t2:", tensor.ToString(tensor.Add(t1, t2)))
+console.Println("t2 - t1:", tensor.ToString(tensor.Subtract(t2, t1)))
+console.Println("t1 * t2:", tensor.ToString(tensor.Multiply(t1, t2)))
+console.Println("t2 / t1:", tensor.ToString(tensor.Divide(t2, t1)))
+
+# Element Access and Modification
+console.Println("\nElement Access and Modification:")
+
+console.Println("Element at [1,1] in t1:", tensor.GetElement(t1, [1,1]))
+t1_modified = tensor.SetElement(t1, [1,1], 100)
+console.Println("t1 after setting [1,1] to 100:", tensor.ToString(t1_modified))
+
+# Statistical Operations
+console.Println("\nStatistical Operations:")
+
+console.Println("Max of t1:", tensor.Max(t1))
+console.Println("Min of t1:", tensor.Min(t1))
+console.Println("Mean of t1:", tensor.Mean(t1))
+console.Println("Variance of t1:", tensor.Variance(t1))
+console.Println("Sum of t1:", tensor.Sum(t1))
+console.Println("Product of t1:", tensor.Product(t1))
+console.Println("Median of t1:", tensor.Median(t1))
+console.Println("Mode of t1:", tensor.Mode(t1))
+console.Println("Range of t1:", tensor.Range(t1))
+
+# Mathematical Operations
+console.Println("\nMathematical Operations:")
+
+console.Println("Square root of t1:", tensor.ToString(tensor.sqrt(t1)))
+console.Println("Exp of t1:", tensor.ToString(tensor.Exp(t1)))
+console.Println("Log of t1:", tensor.ToString(tensor.Log(t1)))
+console.Println("Abs of t1:", tensor.ToString(tensor.Abs(t1)))
+console.Println("Power of t1 (exponent 2):", tensor.ToString(tensor.Power(t1, 2)))
+
+# Normalization and Scaling
+console.Println("\nNormalization and Scaling:")
+
+console.Println("Normalized t1:", tensor.ToString(tensor.Normalize(t1)))
+console.Println("Rescaled t1 (0 to 1):", tensor.ToString(tensor.Rescale(t1, 0, 1)))
+
+# Shape Manipulation
+console.Println("\nShape Manipulation:")
+
+console.Println("Reshaped t1 to [3,2]:", tensor.ToString(tensor.Reshape(t1, [3,2])))
+console.Println("Flattened t1:", tensor.ToString(tensor.Flatten(t1)))
+
+# Slicing and Axis Operations
+console.Println("\nSlicing and Axis Operations:")
+
+console.Println("Slice of t1 (axis 0, start 0, end 1):", tensor.ToString(tensor.Slice(t1, 0, 0, 1)))
+console.Println("Sum along axis 0 of t1:", tensor.ToString(tensor.SumAlongAxis(t1, 0)))
+console.Println("Mean along axis 0 of t1:", tensor.ToString(tensor.MeanAlongAxis(t1, 0)))
+console.Println("Max along axis 0 of t1:", tensor.ToString(tensor.MaxAlongAxis(t1, 0)))
+console.Println("Min along axis 0 of t1:", tensor.ToString(tensor.MinAlongAxis(t1, 0)))
+
+# Matrix Operations
+console.Println("\nMatrix Operations:")
+
+t3 = tensor.NewTensor([3, 2], [1, 2, 3, 4, 5, 6])
+t4 = tensor.NewTensor([2, 3], [7, 8, 9, 10, 11, 12])
+
+console.Println("Dot product of t3 and t4:", tensor.ToString(tensor.Dot(t3, t4)))
+console.Println("Transposed t1:", tensor.ToString(tensor.Transpose(t1)))
+console.Println("Diagonal of t1:", tensor.ToString(tensor.Diagonal(t1)))
+
+# Tensor Generation
+console.Println("\nTensor Generation:")
+
+console.Println("Zeros tensor [2,2]:", tensor.ToString(tensor.Zeros([2,2])))
+console.Println("Ones tensor [2,2]:", tensor.ToString(tensor.Ones([2,2])))
+console.Println("Random tensor [2,2]:", tensor.ToString(tensor.Random([2,2])))
+console.Println("Full tensor [2,2] with value 5:", tensor.ToString(tensor.Full([2,2], 5)))
+console.Println("Arange tensor from 0 to 5 with step 1:", tensor.ToString(tensor.Arange(0, 5, 1)))
+console.Println("Diagonal matrix [3,3] with diagonal 1:", tensor.ToString(tensor.DiagonalMatrix(3, 1)))
+
+# Logical Operations
+console.Println("\nLogical Operations:")
+
+t5 = tensor.NewTensor([2, 2], [1, 0, 1, 0])
+t6 = tensor.NewTensor([2, 2], [1, 1, 0, 0])
+
+console.Println("Logical AND of t5 and t6:", tensor.ToString(tensor.LogicalAnd(t5, t6)))
+console.Println("Logical OR of t5 and t6:", tensor.ToString(tensor.LogicalOr(t5, t6)))
+console.Println("Logical NOT of t5:", tensor.ToString(tensor.LogicalNot(t5)))
+
+# Advanced Operations
+console.Println("\nAdvanced Operations:")
+
+console.Println("Cumulative sum of t1:", tensor.ToString(tensor.CumulativeSum(t1)))
+console.Println("Unique values in t1:", tensor.ToString(tensor.Unique(t1)))
+console.Println("t1 + 5:", tensor.ToString(tensor.AddConstant(t1, 5)))
+console.Println("t1 - 5:", tensor.ToString(tensor.SubtractConstant(t1, 5)))
+console.Println("t1 * 2:", tensor.ToString(tensor.MultiplyConstant(t1, 2)))
+console.Println("t1 / 2:", tensor.ToString(tensor.DivideConstant(t1, 2)))
+
+# Apply custom function
+void square(x) {
+    return x * x
+}
+
+console.Println("Apply square function to t1:", tensor.ToString(tensor.ApplyFunction(t1, square)))
+
+# 3D Tensor operations
+t3d = tensor.NewTensor([2, 2, 2], [1, 2, 3, 4, 5, 6, 7, 8])
+console.Println("3D Tensor:", tensor.ToString(t3d))
+console.Println("Transposed 3D tensor:", tensor.ToString(tensor.Transpose3D(t3d, [1, 0, 2])))
+console.Println("Sum of slices along axis 0:", tensor.ToString(tensor.SumSlices(t3d, 0)))
+
+# Repeat and Concatenate
+console.Println("Repeat t1 twice along axis 0:", tensor.ToString(tensor.Repeat(t1, 0, 2)))
+console.Println("Concatenate t1 and t2 along axis 0:", tensor.ToString(tensor.Concat(t1, t2, 0)))
+
+# Norm calculation
+console.Println("L2 norm of t1:", tensor.Norm(t1))
+
+// StandardDeviation (assuming it's implemented for tensors)
+
+s1 = tensor.scalar.NewScalar(1)
+s2 = tensor.scalar.NewScalar(2)
+s3 = tensor.scalar.NewScalar(3)
+s4 = tensor.scalar.NewScalar(4)
+s5 = tensor.scalar.NewScalar(5)
+s6 = tensor.scalar.NewScalar(6)
+s7 = tensor.scalar.NewScalar(7)
+s8 = tensor.scalar.NewScalar(8)
+
+scalar_list = [s1,s2,s3,s4,s5,s6,s7,s8]
+console.Println("Standard deviation of [1,2,3,4,5]:", tensor.StandardDeviation(scalar_list))

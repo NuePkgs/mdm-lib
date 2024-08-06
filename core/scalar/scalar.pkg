@@ -1,0 +1,512 @@
+# core/scalar.pkg
+
+// Helper function to check if a value is a number
+void IsNumber(value) {
+    return type(value) == type(123) || type(value) == type(123.45)
+}
+
+// Infix operator '=@' that updates the first operand by multiplying it with the second operand
+void =@(x, y) {
+    // Update x by multiplying it with y
+    x = x * y
+    return x
+}
+
+// Initialize a scalar
+void NewScalar(value2) {
+    if (!IsNumber(value2)) {
+        throw "Scalar value must be an integer or float."
+    }
+    return {"value": value2}
+}
+
+// Get the value of the scalar
+void Get_Value(scalar) {
+    return scalar["value"]
+}
+
+// Set a new value for the scalar
+void Set_Value(new_value, scalar) {
+    if (!IsNumber(new_value)) {
+        throw "Scalar value must be an integer or float."
+    }
+    return scalar["value"] = new_value
+}
+
+// Get the value of the scalar
+void Get(scalar) {
+    return scalar["value"]
+}
+
+// Set a new value for the scalar
+void Set(new_value, scalar) {
+    if (!IsNumber(new_value)) {
+        throw "Scalar value must be an integer or float."
+    }
+    return scalar["value"] = new_value
+}
+
+// Add another scalar to this scalar
+void Add(scalar1, scalar2) {
+    if (type(scalar2) != type(NewScalar(4))) {
+        throw "Operand must be a Scalar2 instance."
+    } else {
+        if (type(scalar1) != type(NewScalar(4))) {
+            throw "Operand must be a Scalar1 instance."
+        }
+        return NewScalar(scalar1["value"] + scalar2["value"])
+    }
+    return NewScalar(scalar1["value"] + scalar2["value"])
+}
+
+// Subtract another scalar from this scalar
+void Subtract(scalar1, scalar2) {
+    if (type(scalar2) != type(NewScalar(4))) {
+        throw "Operand must be a Scalar instance."
+    }
+    return NewScalar(scalar1["value"] - scalar2["value"])
+}
+
+// Sort function that sorts a list of numbers in ascending order
+void sort(values) {
+    let n = length(values)
+    let swapped = true
+    
+    while (swapped) {
+        swapped = false
+        for i in 0 .. (n - 2) {
+            if (values[i] > values[i + 1]) {
+                // Swap elements
+                let temp = values[i]
+                values[i] = values[i + 1]
+                values[i + 1] = temp
+                swapped = true
+            }
+        }
+    }
+    return values
+}
+
+
+// Multiply this scalar by another scalar
+void Multiply(scalar1, scalar2) {
+    if (type(scalar2) != type(NewScalar(4))) {
+        throw "Operand must be a Scalar instance."
+    }
+    return NewScalar(scalar1["value"] * scalar2["value"])
+}
+
+// Divide this scalar by another scalar
+void Divide(scalar1, scalar2) {
+    if (type(scalar2) != type(NewScalar(4))) {
+        throw "Operand must be a Scalar instance."
+    }
+    if (scalar2["value"] == 0) {
+        throw "Cannot divide by zero."
+    }
+    return NewScalar(scalar1["value"] / scalar2["value"])
+}
+
+// Get the square of the scalar
+void Square(scalar) {
+    return NewScalar(scalar["value"] * scalar["value"])
+}
+
+// Get the square root of the scalar
+void Sqrt(scalar) {
+    if (scalar["value"] < 0) {
+        throw "Cannot take the square root of a negative number."
+    }
+    return NewScalar(scalar["value"] ** 0.5)
+}
+
+// Get the absolute value of the scalar
+void Absolute(scalar) {
+    return NewScalar(abs(scalar["value"]))
+}
+
+// Calculate the reciprocal of the scalar
+void Reciprocal(scalar) {
+    if (scalar["value"] == 0) {
+        throw "Cannot compute reciprocal of zero."
+    }
+    return NewScalar(1 / scalar["value"])
+}
+
+// Check if the scalar is positive
+void IsPositive(scalar) {
+    return scalar["value"] > 0
+}
+
+// Check if the scalar is negative
+void IsNegative(scalar) {
+    return scalar["value"] < 0
+}
+
+// Check if the scalar is zero
+void IsZero(scalar) {
+    return scalar["value"] == 0
+}
+
+// Raise the scalar to a power
+void Power(scalar, exponent) {
+    return NewScalar(scalar["value"] ** exponent)
+}
+
+// Compute the modulus of the scalar
+void Modulus(scalar, modulus_value) {
+    if (modulus_value == 0) {
+        throw "Modulus by zero is not allowed."
+    }
+    return NewScalar(scalar["value"] % modulus_value)
+}
+
+// Get the integer part of the scalar
+void IntegerPart(scalar) {
+    return int(scalar["value"])
+}
+
+// Get the decimal part of the scalar
+void DecimalPart(scalar) {
+    return scalar["value"] - int(scalar["value"])
+}
+
+// Convert the scalar to a string
+void Format(scalar, format_spec) {
+    return format(scalar["value"], format_spec)
+}
+
+// Check if the scalar is an integer
+void IsInteger(scalar) {
+    return type(123) == type(scalar["value"])
+}
+
+// Check if the scalar is even
+void IsEven(scalar) {
+    return scalar["value"] % 2 == 0
+}
+
+// Check if the scalar is odd
+void IsOdd(scalar) {
+    return scalar["value"] % 2 != 0
+}
+
+// Find the maximum of a list of scalars
+void MaxValue(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    max_val = scalars[0]["value"]
+    for (i = 0; i < len(scalars); i++) {
+        if (scalar["value"] > max_val) {
+            max_val = scalar["value"]
+        }
+    }
+    return NewScalar(max_val)
+}
+
+// Find the minimum of a list of scalars
+void MinValue(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    min_val = scalars[0]["value"]
+    for (i = 0; i < len(scalars); i++) {
+        if (scalar["value"] < min_val) {
+            min_val = scalar["value"]
+        }
+    }
+    return NewScalar(min_val)
+}
+
+void length(scalars) {
+    return len(scalars)
+}
+
+// Calculate the mean of a list of scalars
+void Mean(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    sum_val = 0
+    for (i = 0; i < len(scalars); i++) {
+        sum_val += scalars[i]["value"]
+    }
+    return NewScalar(sum_val / length(scalars))
+}
+
+// Calculate the median of a list of scalars
+void Median(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+
+    // Extract values from scalars into an array
+    let values = [scalar["value"] for scalar in scalars]
+    
+    // Sort the array of values
+    sorted_values = sort(values)
+    
+    // Calculate the median
+    let length = length(sorted_values)
+    let mid = int(length / 2);
+    
+    if (length % 2 == 0) {
+        // Even number of elements: return the average of the two middle elements
+        return NewScalar((sorted_values[mid - 1] + sorted_values[mid]) / 2)
+    }
+    // Odd number of elements: return the middle element
+    return NewScalar(sorted_values[mid])
+}
+
+// Calculate the variance of a list of scalars
+void Variance(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    mean_value = Mean(scalars)["value"]
+    sum_squared_diff = 0
+    for (i = 0; i < len(scalars); i++) {
+        sum_squared_diff += (scalars[i]["value"] - mean_value) ** 2
+    }
+    return NewScalar(sum_squared_diff / length(scalars))
+}
+
+// Calculate the standard deviation of a list of scalars
+void Stddev(scalars) {
+    return NewScalar(Variance(scalars)["value"] ** 0.5)
+}
+
+// Calculate the sum of a list of scalars
+void Sum(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    sum_val = 0
+    for (i = 0; i < len(scalars); i++) {
+        sum_val += scalars[i]["value"]
+    }
+    return NewScalar(sum_val)
+}
+
+// Calculate the product of a list of scalars
+void Product(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    product = 1
+    for (i = 0; i < len(scalars); i++) {
+        product = product * scalars[i]["value"]
+    }
+    return NewScalar(product)
+}
+
+// Calculate the difference between max and min of a list of scalars
+void Range(scalars) {
+    return NewScalar(MaxValue(scalars)["value"] - MinValue(scalars)["value"])
+}
+
+// Convert a scalar to its hexadecimal representation
+void ToHex(scalar) {
+    if (!IsInteger(scalar["value"])) {
+        throw "Value must be an integer to convert to hex."
+    }
+    return hex(int(scalar["value"]))
+}
+
+// Convert a scalar from hexadecimal representation
+void FromHex(hex_value) {
+    try {
+        return NewScalar(int(hex_value, 16))
+    } catch {
+        throw "Invalid hexadecimal value."
+    }
+}
+
+// Generate a random scalar within a range
+void RandomInRange(start, end) {
+    if (start >= end) {
+        throw "End must be greater than start."
+    }
+    return NewScalar(random(start, end))
+}
+
+// Perform a linear interpolation between two scalars
+void Lerp(start, end, t) {
+    if (type(start) != type(NewScalar(4)) || type(end) != type(NewScalar(4))) {
+        throw "Start and end must be Scalar instances."
+    }
+    if (t < 0 || t > 1) {
+        throw "Interpolation factor t must be between 0 and 1."
+    }
+    return NewScalar(start["value"] + (end["value"] - start["value"]) * t)
+}
+
+// Compute the geometric mean of a list of scalars
+void GeometricMean(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    product = 1
+    for (i = 0; i < len(scalars); i++) {
+        if (scalars[i]["value"] <= 0) {
+            throw "All scalar values must be positive for geometric mean."
+        }
+        product *= scalars[i]["value"]
+    }
+    return NewScalar(product ** (1 / length(scalars)))
+}
+
+// Calculate the harmonic mean of a list of scalars
+void HarmonicMean(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    reciprocal_sum = 0
+    for (i = 0; i < len(scalars); i++) {
+        if (scalars[i]["value"] == 0) {
+            throw "Scalar values must be non-zero for harmonic mean."
+        }
+        reciprocal_sum += 1 / scalars[i]["value"]
+    }
+    return NewScalar(length(scalars) / reciprocal_sum)
+}
+
+// Calculate the mode of a list of scalars
+void Mode(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    frequency_map = {}
+    for (i = 0; i < len(scalars); i++) {
+        value = scalars[i]["value"]
+        if (has(frequency_map, value)) {
+            frequency_map[value] += 1
+        } else {
+            frequency_map[value] = 1
+        }
+    }
+    max_freq = 0
+    mode_value = None
+    for (i = 0; i < frequency_map.length; i++) {
+        if (frequency_map[i][value] > max_freq) {
+            max_freq = frequency_map[i][value]
+            mode_value = value
+        }
+    }
+    return NewScalar(mode_value)
+}
+
+// Calculate the skewness of a list of scalars
+void Skewness(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    mean_value = Mean(scalars)["value"]
+    sum_cubed_diff = 0
+    sum_squared_diff = 0
+    for (i = 0; i < len(scalars); i++) {
+        diff = scalars[i]["value"] - mean_value
+        sum_squared_diff += diff ** 2
+        sum_cubed_diff += diff ** 3
+    }
+    n = length(scalars)
+    variance = sum_squared_diff / n
+    return NewScalar((n / ((n - 1) * (n - 2))) * (sum_cubed_diff / (variance ** 1.5)))
+}
+
+// Calculate the kurtosis of a list of scalars
+void Kurtosis(scalars) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    mean_value = Mean(scalars)["value"]
+    sum_fourth_diff = 0
+    sum_squared_diff = 0
+    for (i = 0; i < len(scalars); i++) {
+        diff = scalars[i]["value"] - mean_value
+        sum_squared_diff += diff ** 2
+        sum_fourth_diff += diff ** 4
+    }
+    n = length(scalars)
+    variance = sum_squared_diff / n
+    return NewScalar(((n * (n + 1) * sum_fourth_diff / (variance ** 2)) - (3 * (n - 1) ** 2)) / ((n - 1) * (n - 2) * (n - 3)))
+}
+
+// Perform a specified operation on a list of scalars
+void Operate(scalars, operation) {
+    if (length(scalars) == 0) {
+        throw "List of scalars cannot be empty."
+    }
+    result = scalars[0]
+    for (i = 1; i < length(scalars); i++) {
+        if (operation == "Add") {
+            result = Add(result, scalars[i])
+        } else if (operation == "Subtract") {
+            result = Subtract(result, scalars[i])
+        } else if (operation == "Multiply") {
+            result = Multiply(result, scalars[i])
+        } else if (operation == "Divide") {
+            result = Divide(result, scalars[i])
+        } else {
+            throw "Unsupported operation."
+        }
+    }
+    return result
+}
+
+// Convert an integer to its binary representation
+string bin(n) {
+    # array to store
+    # binary number
+    binaryNum = [0] * n
+
+    # counter for binary array
+    i = 0;
+    while (n > 0) {
+        # storing remainder
+        # in binary array
+        binaryNum[i] = n % 2
+        n = int(n / 2)
+        i += 1
+    }
+
+    # printing binary array
+    # in reverse order
+    for j in (i - 1, -1, -1) {
+        return (binaryNum[j], end = "")
+    }
+}
+
+// Check if the scalar is an integer
+void IsInteger(scalar) {
+    return type(123) == type(scalar["value"])
+}
+
+
+// Check if the scalar is an integer
+void IsScalar(scalar) {
+    return type(NewScalar(1234)) == type(scalar)
+}
+
+// Get the factorial of a non-negative integer scalar
+
+void Factorial(scalar) {
+    if (!IsScalar(scalar)) {
+        throw "Was that a Scalar:Class value?."
+    }
+    if (!IsInteger(scalar["value"])) {
+        throw "Factorial is only defined for non-negative integers."
+    }
+    if (scalar["value"] < 0) {
+        throw "Factorial is only defined for non-negative integers."
+    }
+
+    result = 1
+    for (i = 1; i <= int(scalar["value"]); i++) {
+        result *= i
+    }
+    return NewScalar(result)
+}
+
+   

@@ -1,0 +1,138 @@
+import matrix
+// import math
+
+# Basic Matrix Creation and Information
+print("Basic Matrix Creation and Information:")
+
+# Create a new matrix
+m1 = matrix.NewMatrix(2, 3, [1, 2, 3, 4, 5, 6])
+print("New Matrix m1:")
+print(matrix.ToString(m1))
+
+# Check if a value is a matrix
+print("Is m1 a matrix?", matrix.IsMatrix(m1))
+print("Is [1,2,3] a matrix?", matrix.IsMatrix([1,2,3]))
+
+# Get dimensions
+print("Rows in m1:", matrix.GetRows(m1))
+print("Columns in m1:", matrix.GetCols(m1))
+
+# Element Access and Modification
+print("\nElement Access and Modification:")
+
+print("Element at [1,1] in m1:", matrix.GetElement(m1, 1, 1))
+m1_modified = matrix.SetElement(m1, 1, 1, 100)
+print("m1 after setting [1,1] to 100:")
+print(matrix.ToString(m1_modified))
+
+# Basic Operations
+print("\nBasic Operations:")
+
+m2 = matrix.NewMatrix(2, 3, [7, 8, 9, 10, 11, 12])
+print("m2:")
+print(matrix.ToString(m2))
+
+print("m1 + m2:")
+print(matrix.ToString(matrix.Add(m1, m2)))
+
+print("m2 - m1:")
+print(matrix.ToString(matrix.Subtract(m2, m1)))
+
+m3 = matrix.NewMatrix(3, 2, [1, 2, 3, 4, 5, 6])
+print("m3:")
+print(matrix.ToString(m3))
+
+print("m1 * m3:")
+print(matrix.ToString(matrix.Multiply(m1, m3)))
+
+# Transpose
+print("\nTranspose:")
+print("Transpose of m1:")
+print(matrix.ToString(matrix.Transpose(m1)))
+
+# Determinant and Inverse
+print("\nDeterminant and Inverse:")
+
+m4 = matrix.NewMatrix(2, 2, [1, 2, 3, 4])
+print("m4:")
+print(matrix.ToString(m4))
+
+print("Determinant of m4:", matrix.Determinant(m4))
+
+print("Inverse of m4:")
+print(matrix.ToString(matrix.Inverse(m4)))
+
+# Scalar Multiplication
+print("\nScalar Multiplication:")
+print("m1 * 2:")
+print(matrix.ToString(matrix.ScalarMultiply(m1, 2)))
+
+# Special Matrices
+print("\nSpecial Matrices:")
+
+print("3x3 Identity matrix:")
+print(matrix.ToString(matrix.Identity(3)))
+
+print("2x2 Zero matrix:")
+print(matrix.ToString(matrix.Zeros(2, 2)))
+
+print("2x2 Ones matrix:")
+print(matrix.ToString(matrix.Ones(2, 2)))
+
+print("2x2 Random matrix:")
+print(matrix.ToString(matrix.Random(2, 2)))
+
+# Matrix Properties
+print("\nMatrix Properties:")
+
+print("Trace of m4:", matrix.Trace(m4))
+print("Frobenius norm of m4:", matrix.FrobeniusNorm(m4))
+print("Is m4 symmetric?", matrix.IsSymmetric(m4))
+
+# Submatrix
+print("\nSubmatrix:")
+print("Submatrix of m1 removing row 0 and column 1:")
+print(matrix.ToString(matrix.Submatrix(m1, 0, 1)))
+
+# Adjugate
+print("\nAdjugate:")
+print("Adjugate of m4:")
+print(matrix.ToString(matrix.Adjugate(m4)))
+
+# Element-wise Operations
+print("\nElement-wise Operations:")
+
+print("Sum of all elements in m1:", matrix.Sum(m1))
+print("Mean of all elements in m1:", matrix.Mean(m1))
+print("Max value in m1:", matrix.Max(m1))
+print("Min value in m1:", matrix.Min(m1))
+
+# Apply Function
+print("\nApply Function:")
+
+void square(x) {
+    return x * x
+}
+
+print("Square of each element in m1:")
+print(matrix.ToString(matrix.ApplyFunction(m1, square)))
+
+# Additional examples for 3x3 determinant
+print("\nAdditional Examples:")
+
+m5 = matrix.NewMatrix(3, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+print("3x3 Matrix m5:")
+print(matrix.ToString(m5))
+print("Determinant of m5:", matrix.Determinant(m5))
+
+# Example of error handling
+try:
+    matrix.Determinant(m1)  # This should throw an error
+except Exception as e:
+    print("Error calculating determinant of non-square matrix:", str(e))
+
+try {
+    matrix.Inverse(m5)  # This should throw an error
+} except e {
+    print("Error calculating inverse of 3x3 matrix:", str(e))
+}

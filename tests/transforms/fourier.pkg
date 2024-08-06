@@ -1,0 +1,119 @@
+# transforms/fourier.pkg
+
+
+// Complex number struct
+class Complex {
+    void init(Areal,Aimag) {
+        this.real = Areal
+        this.imag = Aimag
+    }
+}
+
+// Complex multiplication
+void Multiply(a, b) {
+    return new Complex(
+         a.real * b.real - a.imag * b.imag,
+         a.real * b.imag + a.imag * b.real
+    )
+}
+
+// Complex addition
+void Add(a, b) {
+    return new Complex(
+         a.real + b.real,
+         a.imag + b.imag
+    )
+}
+
+// Complex subtraction
+void Subtract(a, b) {
+    return new Complex(
+         a.real - b.real,
+         a.imag - b.imag
+    )
+}
+
+// Fast Fourier Transform (FFT)
+void FFT(x) {
+    let n = len(x)
+    if n <= 1 {
+        return x
+    }
+
+    let even = FFT(x[0:n:2])
+    let odd = FFT(x[1:n:2])
+
+    let twiddles = []
+    for k in 0..int((n/2)) {
+        let angle = -2 * math.PI * float(k) / float(n)
+        twiddles += (Complex( math.Cos(angle),  math.Sin(angle)))
+    }
+
+    let result = []
+    for k in 0..int((n/2)) {
+        let t = Multiply(twiddles[k], odd[k])
+        result += (Add(even[k], t))
+        result += (Subtract(even[k], t))
+    }
+
+    return result
+}
+
+// Inverse Fast Fourier Transform (IFFT)
+void IFFT(x) {
+    let n = len(x)
+    let conjugate = []
+    for i in 0..n {
+        conjugate += (Complex( x[i].real,  -x[i].imag))
+    }
+
+    let result = FFT(conjugate)
+    for i in 0..n {
+        result[i] = Complex(
+             result[i].real / float(n),
+             -result[i].imag / float(n)
+        )
+    }
+
+    return result
+}
+
+// Helper function to create a complex number
+void NewComplex(real, imag) {
+    return new Complex( real,  imag)
+}
+
+// Example usage
+void TestFourier() {
+    // Create a sample signal
+    let signal = [
+        NewComplex(1, 0),
+        NewComplex(2, 0),
+        NewComplex(3, 0),
+        NewComplex(4, 0)
+    ]
+
+    println("Original signal:")
+    for c in signal {
+        printf("%.2f + %.2fi\n", c.real, c.imag)
+    }
+
+    // Perform FFT
+    let fft_result = FFT(signal)
+
+    println("\nFFT result:")
+    for c in fft_result {
+        printf("%.2f + %.2fi\n", c.real, c.imag)
+    }
+
+    // Perform IFFT
+    let ifft_result = IFFT(fft_result)
+
+    println("\nIFFT result (should be close to original signal):")
+    for c in ifft_result {
+        printf("%.2f + %.2fi\n", c.real, c.imag)
+    }
+}
+
+// Run the example
+TestFourier()

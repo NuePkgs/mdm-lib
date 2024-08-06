@@ -1,0 +1,181 @@
+# operations/geometric.pkg
+
+// 2D Geometric Shapes
+
+// Circle Operations
+void CircleArea(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return 3.141592653589793 * radius^2
+    }
+    throw "Unsupported type for circle area"
+}
+
+void CircleCircumference(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return 2 * 3.141592653589793 * radius
+    }
+    throw "Unsupported type for circle circumference"
+}
+
+// Rectangle Operations
+void RectangleArea(length, width) {
+    if (type(length) == "FLOAT" || type(length) == "INTEGER" &&
+        type(width) == "FLOAT" || type(width) == "INTEGER") {
+        return length * width
+    }
+    throw "Unsupported types for rectangle area"
+}
+
+void RectanglePerimeter(length, width) {
+    if (type(length) == "FLOAT" || type(length) == "INTEGER" &&
+        type(width) == "FLOAT" || type(width) == "INTEGER") {
+        return 2 * (length + width)
+    }
+    throw "Unsupported types for rectangle perimeter"
+}
+
+// Triangle Operations
+void TriangleArea(base, height) {
+    if (type(base) == "FLOAT" || type(base) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return 0.5 * base * height
+    }
+    throw "Unsupported types for triangle area"
+}
+
+void TrianglePerimeter(a, b, c) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER") {
+        return a + b + c
+    }
+    throw "Unsupported types for triangle perimeter"
+}
+
+// Ellipse Operations
+void EllipseArea(a, b) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER") {
+        return 3.141592653589793 * a * b
+    }
+    throw "Unsupported types for ellipse area"
+}
+
+void EllipseCircumference(a, b) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER") {
+        float h = ((a - b)^2) / ((a + b)^2)
+        return 3.141592653589793 * (a + b) * (1 + (3 * h) / (10 + sqrt(4 - 3 * h)))
+    }
+    throw "Unsupported types for ellipse circumference"
+}
+
+// Parallelogram Operations
+void ParallelogramArea(base, height) {
+    if (type(base) == "FLOAT" || type(base) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return base * height
+    }
+    throw "Unsupported types for parallelogram area"
+}
+
+void ParallelogramPerimeter(side1, side2) {
+    if (type(side1) == "FLOAT" || type(side1) == "INTEGER" &&
+        type(side2) == "FLOAT" || type(side2) == "INTEGER") {
+        return 2 * (side1 + side2)
+    }
+    throw "Unsupported types for parallelogram perimeter"
+}
+
+// Trapezoid Operations
+void TrapezoidArea(base1, base2, height) {
+    if (type(base1) == "FLOAT" || type(base1) == "INTEGER" &&
+        type(base2) == "FLOAT" || type(base2) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return 0.5 * (base1 + base2) * height
+    }
+    throw "Unsupported types for trapezoid area"
+}
+
+void TrapezoidPerimeter(a, b, c, d) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER") {
+        return a + b + c + d
+    }
+    throw "Unsupported types for trapezoid perimeter"
+}
+
+// Polygon Operations
+void PolygonArea(sides, length) {
+    if (type(sides) == "INTEGER" && type(length) == "FLOAT" || type(length) == "INTEGER") {
+        if (sides < 3) {
+            throw "Polygon must have at least 3 sides"
+        }
+        return (sides * length^2) / (4 * tan(3.141592653589793 / sides))
+    }
+    throw "Unsupported types for polygon area"
+}
+
+void PolygonPerimeter(sides, length) {
+    if (type(sides) == "INTEGER" && type(length) == "FLOAT" || type(length) == "INTEGER") {
+        if (sides < 3) {
+            throw "Polygon must have at least 3 sides"
+        }
+        return sides * length
+    }
+    throw "Unsupported types for polygon perimeter"
+}
+
+// More 2D Functions
+
+// Rhombus Operations
+void RhombusArea(diagonal1, diagonal2) {
+    if (type(diagonal1) == "FLOAT" || type(diagonal1) == "INTEGER" &&
+        type(diagonal2) == "FLOAT" || type(diagonal2) == "INTEGER") {
+        return 0.5 * diagonal1 * diagonal2
+    }
+    throw "Unsupported types for rhombus area"
+}
+
+void RhombusPerimeter(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return 4 * side
+    }
+    throw "Unsupported type for rhombus perimeter"
+}
+
+// Kite Operations
+void KiteArea(diagonal1, diagonal2) {
+    if (type(diagonal1) == "FLOAT" || type(diagonal1) == "INTEGER" &&
+        type(diagonal2) == "FLOAT" || type(diagonal2) == "INTEGER") {
+        return 0.5 * diagonal1 * diagonal2
+    }
+    throw "Unsupported types for kite area"
+}
+
+void KitePerimeter(side1, side2) {
+    if (type(side1) == "FLOAT" || type(side1) == "INTEGER" &&
+        type(side2) == "FLOAT" || type(side2) == "INTEGER") {
+        return 2 * (side1 + side2)
+    }
+    throw "Unsupported types for kite perimeter"
+}
+
+// Sector Operations
+void SectorArea(radius, angle) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(angle) == "FLOAT" || type(angle) == "INTEGER") {
+        return 0.5 * radius^2 * angle
+    }
+    throw "Unsupported types for sector area"
+}
+
+void SectorArcLength(radius, angle) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(angle) == "FLOAT" || type(angle) == "INTEGER") {
+        return radius * angle
+    }
+    throw "Unsupported types for sector arc length"
+}

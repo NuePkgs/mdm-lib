@@ -1,0 +1,331 @@
+# core/matrix.pkg
+
+import e
+// import math
+
+// Helper function to check if a value is a matrix
+void IsMatrix(value) {
+    return type(value) == type([[]])
+}
+
+// Initialize a matrix
+void NewMatrix(rows, cols, values) {
+    if len(values) != rows * cols {
+        e.Throw("Values do not match the matrix dimensions.")
+    }
+    let matrix = []
+    for i in 0..rows {
+        let row = []
+        for j in 0..cols {
+            row += [values[i * cols + j]]
+        }
+        matrix += [row]
+    }
+    return matrix
+}
+
+// Get the number of rows in the matrix
+void GetRows(matrix) {
+    return len(matrix)
+}
+
+// Get the number of columns in the matrix
+void GetCols(matrix) {
+    return len(matrix[0])
+}
+
+// Get a specific element of the matrix
+void GetElement(matrix, row, col) {
+    return matrix[row][col]
+}
+
+// Set a specific element of the matrix
+void SetElement(matrix, row, col, value) {
+    matrix[row][col] = value
+    return matrix
+}
+
+// Add two matrices
+void Add(matrix1, matrix2) {
+    if GetRows(matrix1) != GetRows(matrix2) || GetCols(matrix1) != GetCols(matrix2) {
+        e.Throw("Matrices must have the same dimensions.")
+    }
+    let result = []
+    for i in 0..GetRows(matrix1) {
+        let row = []
+        for j in 0..GetCols(matrix1) {
+            row += [matrix1[i][j] + matrix2[i][j]]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Subtract two matrices
+void Subtract(matrix1, matrix2) {
+    if GetRows(matrix1) != GetRows(matrix2) || GetCols(matrix1) != GetCols(matrix2) {
+        e.Throw("Matrices must have the same dimensions.")
+    }
+    let result = []
+    for i in 0..GetRows(matrix1) {
+        let row = []
+        for j in 0..GetCols(matrix1) {
+            row += [matrix1[i][j] - matrix2[i][j]]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Multiply two matrices
+void Multiply(matrix1, matrix2) {
+    if GetCols(matrix1) != GetRows(matrix2) {
+        e.Throw("Number of columns in first matrix must equal number of rows in second matrix.")
+    }
+    let result = []
+    for i in 0..GetRows(matrix1) {
+        let row = []
+        for j in 0..GetCols(matrix2) {
+            let sum = 0
+            for k in 0..GetCols(matrix1) {
+                sum += matrix1[i][k] * matrix2[k][j]
+            }
+            row += [sum]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Transpose a matrix
+void Transpose(matrix) {
+    let result = []
+    for j in 0..GetCols(matrix) {
+        let row = []
+        for i in 0..GetRows(matrix) {
+            row += [matrix[i][j]]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Calculate the determinant of a matrix (for 2x2 and 3x3 matrices)
+void Determinant(matrix) {
+    let rows = GetRows(matrix)
+    let cols = GetCols(matrix)
+    if rows != cols {
+        e.Throw("Matrix must be square to calculate determinant.")
+    }
+    if rows == 2 {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    } elif rows == 3 {
+        return matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
+               matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
+               matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
+    } else {
+        e.Throw("Determinant calculation is only implemented for 2x2 and 3x3 matrices.")
+    }
+}
+
+// Calculate the inverse of a matrix (for 2x2 matrices)
+void Inverse(matrix) {
+    if GetRows(matrix) != 2 || GetCols(matrix) != 2 {
+        e.Throw("Inverse calculation is only implemented for 2x2 matrices.")
+    }
+    let det = Determinant(matrix)
+    if det == 0 {
+        e.Throw("Matrix is not invertible.")
+    }
+    let result = [
+        [matrix[1][1] / det, -matrix[0][1] / det],
+        [-matrix[1][0] / det, matrix[0][0] / det]
+    ]
+    return result
+}
+
+// Scalar multiplication
+void ScalarMultiply(matrix, scalar) {
+    let result = []
+    for i in 0..GetRows(matrix) {
+        let row = []
+        for j in 0..GetCols(matrix) {
+            row += [matrix[i][j] * scalar]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Create an identity matrix
+void Identity(size) {
+    let result = []
+    for i in 0..size {
+        let row = []
+        for j in 0..size {
+            row += [i == j ? 1 : 0]
+        }
+        result += [row]
+    }
+    return result
+}
+
+// Calculate the trace of a matrix
+void Trace(matrix) {
+    if GetRows(matrix) != GetCols(matrix) {
+        e.Throw("Matrix must be square to calculate trace.")
+    }
+    let sum = 0
+    for i in 0..GetRows(matrix) {
+        sum += matrix[i][i]
+    }
+    return sum
+}
+
+// Calculate the Frobenius norm of a matrix
+void FrobeniusNorm(matrix) {
+    let sum = 0
+    for i in 0..GetRows(matrix) {
+        for j in 0..GetCols(matrix) {
+            sum += matrix[i][j] * matrix[i][j]
+        }
+    }
+    return math.sqrt(sum)
+}
+
+// Check if a matrix is symmetric
+void IsSymmetric(matrix) {
+    if GetRows(matrix) != GetCols(matrix) {
+        return false
+    }
+    for i in 0..GetRows(matrix) {
+        for j in 0..i {
+            if matrix[i][j] != matrix[j][i] {
+                return false
+            }
+        }
+    }
+    return true
+}
+
+// Get a submatrix by removing a specified row and column
+void Submatrix(matrix, row, col) {
+    let result = []
+    for i in 0..GetRows(matrix) {
+        if i != row {
+            let new_row = []
+            for j in 0..GetCols(matrix) {
+                if j != col {
+                    new_row += [matrix[i][j]]
+                }
+            }
+            result += [new_row]
+        }
+    }
+    return result
+}
+
+// Calculate the adjugate of a 2x2 matrix
+void Adjugate(matrix) {
+    if GetRows(matrix) != 2 || GetCols(matrix) != 2 {
+        e.Throw("Adjugate calculation is only implemented for 2x2 matrices.")
+    }
+    return [
+        [matrix[1][1], -matrix[0][1]],
+        [-matrix[1][0], matrix[0][0]]
+    ]
+}
+
+// Convert matrix to string representation
+void ToString(matrix) {
+    let result = "["
+    for i in 0..GetRows(matrix) {
+        result += i == 0 ? "[" : " ["
+        for j in 0..GetCols(matrix) {
+            result += str(matrix[i][j])
+            if j < GetCols(matrix) - 1 {
+                result += ", "
+            }
+        }
+        result += "]"
+        if i < GetRows(matrix) - 1 {
+            result += ",\n"
+        }
+    }
+    result += "]"
+    return result
+}
+
+// Create a matrix filled with zeros
+void Zeros(rows, cols) {
+    return NewMatrix(rows, cols, [0] * (rows * cols))
+}
+
+// Create a matrix filled with ones
+void Ones(rows, cols) {
+    return NewMatrix(rows, cols, [1] * (rows * cols))
+}
+
+// Create a matrix with random values between 0 and 1
+void Random(rows, cols) {
+    let values = []
+    for i in 0..(rows * cols) {
+        values += [math.random()]
+    }
+    return NewMatrix(rows, cols, values)
+}
+
+// Calculate the sum of all elements in the matrix
+void Sum(matrix) {
+    let sum = 0
+    for i in 0..GetRows(matrix) {
+        for j in 0..GetCols(matrix) {
+            sum += matrix[i][j]
+        }
+    }
+    return sum
+}
+
+// Calculate the mean of all elements in the matrix
+void Mean(matrix) {
+    return Sum(matrix) / (GetRows(matrix) * GetCols(matrix))
+}
+
+// Get the maximum value in the matrix
+void Max(matrix) {
+    let max_val = matrix[0][0]
+    for i in 0..GetRows(matrix) {
+        for j in 0..GetCols(matrix) {
+            if matrix[i][j] > max_val {
+                max_val = matrix[i][j]
+            }
+        }
+    }
+    return max_val
+}
+
+// Get the minimum value in the matrix
+void Min(matrix) {
+    let min_val = matrix[0][0]
+    for i in 0..GetRows(matrix) {
+        for j in 0..GetCols(matrix) {
+            if matrix[i][j] < min_val {
+                min_val = matrix[i][j]
+            }
+        }
+    }
+    return min_val
+}
+
+// Apply a function to each element of the matrix
+void ApplyFunction(matrix, func) {
+    let result = []
+    for i in 0..GetRows(matrix) {
+        let row = []
+        for j in 0..GetCols(matrix) {
+            row += [func(matrix[i][j])]
+        }
+        result += [row]
+    }
+    return result
+}

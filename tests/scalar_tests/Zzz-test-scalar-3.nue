@@ -1,0 +1,163 @@
+// Example usage for statistical and mathematical functions
+
+import scalar2
+import scalar3
+import scalar
+
+
+// Define scalars and other necessary data
+scalars = [scalar.NewScalar(10), scalar.NewScalar(12), scalar.NewScalar(11), scalar.NewScalar(13)]
+scalars2 = scalar.NewScalar(14)
+predictions = [scalar.NewScalar(10), scalar.NewScalar(11), scalar.NewScalar(12)]
+targets = [scalar.NewScalar(10), scalar.NewScalar(12), scalar.NewScalar(11)]
+covariance_matrix = [[1, 0], [0, 1]]  // Example covariance matrix
+point1 = {"x": 1, "y": 2, "z": 3}
+point2 = {"x": 4, "y": 5, "z": 6}
+vector1 = [1, 2, 3]
+vector2 = [4, 5, 6]
+alpha = 0.1
+window_size = 3
+
+// Calculate the standard error of the mean for a list of scalars
+scalar_std_error = scalar3.StandardErrorOfMean(scalars)
+print("Standard Error of Mean:", scalar_std_error["value"])
+
+// Calculate the Z-score of a scalar in a list
+scalar_z_score = scalar3.ZScore(scalars, scalar)
+print("Z-Score:", scalar_z_score["value"])
+
+// Calculate the median absolute deviation of a list of scalars
+scalar_mad = scalar3.MedianAbsoluteDeviation(scalars)
+print("Median Absolute Deviation:", scalar_mad["value"])
+
+// Calculate the geometric standard deviation of a list of scalars
+scalar_geo_std_dev = scalar3.GeometricStandardDeviation(scalars)
+print("Geometric Standard Deviation:", scalar_geo_std_dev["value"])
+
+// Calculate the sum of squared differences from the mean
+scalar_ssd = scalar3.SumOfSquaredDifferences(scalars)
+print("Sum of Squared Differences:", scalar_ssd["value"])
+
+// Calculate the mean squared error of a list of scalars
+scalar_mse = scalar3.MeanSquaredError(predictions, targets)
+print("Mean Squared Error:", scalar_mse["value"])
+
+// Calculate the root mean squared error of a list of scalars
+scalar_rmse = scalar3.RootMeanSquaredError(predictions, targets)
+print("Root Mean Squared Error:", scalar_rmse["value"])
+
+// Calculate the R-squared value of a regression
+scalar_r_squared = scalar3.RSquared(predictions, targets)
+print("R-Squared:", scalar_r_squared["value"])
+
+// Calculate the adjusted R-squared value of a regression
+scalar_adj_r_squared = scalar3.AdjustedRSquared(predictions, targets, 1)
+print("Adjusted R-Squared:", scalar_adj_r_squared["value"])
+
+// Calculate the entropy of a list of scalars
+scalar_entropy = scalar3.Entropy(scalars)
+print("Entropy:", scalar_entropy["value"])
+
+// Calculate the mutual information between two lists of scalars
+scalar_mutual_info = scalar3.MutualInformation(scalars, targets)
+print("Mutual Information:", scalar_mutual_info["value"])
+
+// Calculate the correlation coefficient between two lists of scalars
+scalar_corr_coeff = scalar3.CorrelationCoefficient(scalars, targets)
+print("Correlation Coefficient:", scalar_corr_coeff["value"])
+
+// Calculate the Pearson correlation coefficient between two lists of scalars
+scalar_pearson_corr = scalar3.PearsonCorrelation(scalars, targets)
+print("Pearson Correlation Coefficient:", scalar_pearson_corr["value"])
+
+// Calculate the Spearman rank correlation coefficient between two lists of scalars
+scalar_spearman_corr = scalar3.SpearmanCorrelation(scalars, targets)
+print("Spearman Rank Correlation Coefficient:", scalar_spearman_corr["value"])
+
+// Calculate the Kendall tau correlation coefficient between two lists of scalars
+scalar_kendall_tau = scalar3.KendallTau(scalars, targets)
+print("Kendall Tau Correlation Coefficient:", scalar_kendall_tau["value"])
+
+// Calculate the mean absolute error of a list of scalars
+scalar_mae = scalar3.MeanAbsoluteError(predictions, targets)
+print("Mean Absolute Error:", scalar_mae["value"])
+
+// Calculate the weighted mean of a list of scalars
+scalar_weighted_mean = scalar3.WeightedMean(scalars, [1, 2, 1, 2])
+print("Weighted Mean:", scalar_weighted_mean["value"])
+
+// Calculate the weighted variance of a list of scalars
+scalar_weighted_variance = scalar3.WeightedVariance(scalars, [1, 2, 1, 2])
+print("Weighted Variance:", scalar_weighted_variance["value"])
+
+// Calculate the weighted standard deviation of a list of scalars
+scalar_weighted_std_dev = scalar3.WeightedStandardDeviation(scalars, [1, 2, 1, 2])
+print("Weighted Standard Deviation:", scalar_weighted_std_dev["value"])
+
+// Calculate the harmonic mean of a list of scalars
+scalar_harmonic_mean = scalar3.HarmonicMean(scalars)
+print("Harmonic Mean:", scalar_harmonic_mean["value"])
+
+// Calculate the geometric mean of a list of scalars
+scalar_geo_mean = scalar3.GeometricMean(scalars)
+print("Geometric Mean:", scalar_geo_mean["value"])
+
+// Calculate the median absolute deviation (MAD) of a list of scalars
+scalar_mad = scalar3.MedianAbsoluteDeviation(scalars)
+print("Median Absolute Deviation:", scalar_mad["value"])
+
+// Calculate the kurtosis of a list of scalars
+scalar_kurtosis = scalar3.Kurtosis(scalars)
+print("Kurtosis:", scalar_kurtosis["value"])
+
+// Calculate the skewness of a list of scalars
+scalar_skewness = scalar3.Skewness(scalars)
+print("Skewness:", scalar_skewness["value"])
+
+// Calculate the 2D Euclidean distance between two points
+scalar_euclidean_dist_2d = scalar3.EuclideanDistance2D(point1, point2)
+print("2D Euclidean Distance:", scalar_euclidean_dist_2d["value"])
+
+// Calculate the 3D Euclidean distance between two points
+scalar_euclidean_dist_3d = scalar3.EuclideanDistance3D(point1, point2)
+print("3D Euclidean Distance:", scalar_euclidean_dist_3d["value"])
+
+// Calculate the Minkowski distance between two points
+scalar_minkowski_dist = scalar3.MinkowskiDistance(point1, point2, 3)
+print("Minkowski Distance:", scalar_minkowski_dist["value"])
+
+// Calculate the Mahalanobis distance between two points
+scalar_mahalanobis_dist = scalar3.MahalanobisDistance(point1, point2, covariance_matrix)
+print("Mahalanobis Distance:", scalar_mahalanobis_dist["value"])
+
+// Calculate the dot product of two vectors
+scalar_dot_product = scalar3.DotProduct(vector1, vector2)
+print("Dot Product:", scalar_dot_product["value"])
+
+// Calculate the cross product of two 3D vectors
+vector_cross_product = scalar3.CrossProduct(vector1, vector2)
+print("Cross Product:", vector_cross_product)
+
+// Calculate the angle between two 3D vectors
+scalar_angle = scalar3.AngleBetweenVectors(vector1, vector2)
+print("Angle Between Vectors (radians):", scalar_angle["value"])
+
+// Calculate the projection of one vector onto another
+vector_projection = scalar3.Projection(vector1, vector2)
+print("Projection:", vector_projection)
+
+// Calculate the norm (magnitude) of a vector
+scalar_norm = scalar3.Norm(vector1)
+print("Norm:", scalar_norm["value"])
+
+// Calculate the linear regression coefficients
+scalar_regression_coeffs = scalar3.LinearRegressionCoefficients([scalar.NewScalar(1), scalar.NewScalar(2), scalar.NewScalar(3)], [scalar.NewScalar(2), scalar.NewScalar(3), scalar.NewScalar(4)])
+print("Linear Regression Coefficients:", scalar_regression_coeffs)
+
+// Calculate the exponential moving average of a list of scalars
+scalar_ema = scalar3.ExponentialMovingAverage(scalars, alpha)
+print("Exponential Moving Average:", scalar_ema["value"])
+
+// Calculate the simple moving average of a list of scalars
+scalar_sma = scalar3.SimpleMovingAverage(scalars, window_size)
+print("Simple Moving Average:", scalar_sma["value"])

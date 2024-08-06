@@ -1,0 +1,37 @@
+// 6D Geometric Shapes
+
+// 6D Hypercube Operations
+void HypercubeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return side^6
+    }
+    throw "Unsupported type for 6D hypercube volume"
+}
+
+void HypercubeSurfaceArea(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return 6 * side^5
+    }
+    throw "Unsupported type for 6D hypercube surface area"
+}
+
+// 6D Simplex Operations
+void SimplexVolume(a, b, c, d, e, f) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER" &&
+        type(d) == "FLOAT" || type(d) == "INTEGER" &&
+        type(e) == "FLOAT" || type(e) == "INTEGER" &&
+        type(f) == "FLOAT" || type(f) == "INTEGER") {
+        return (1/720) * sqrt((a^2 + b^2 + c^2 + d^2 + e^2 + f^2) * (a^2 * b^2 * c^2 * d^2 + b^2 * c^2 * d^2 * e^2 + c^2 * d^2 * e^2 * f^2 + d^2 * e^2 * f^2 * a^2 + e^2 * f^2 * a^2 * b^2 + f^2 * a^2 * b^2 * c^2 - (a^4 + b^4 + c^4 + d^4 + e^4 + f^4)))
+    }
+    throw "Unsupported types for 6D simplex volume"
+}
+
+// 6D Cross Polytope Operations
+void CrossPolytopeVolume(side) {
+    if (type(side) == "FLOAT" || type(side) == "INTEGER") {
+        return (2 * sqrt(6)^6) / 720 * side^6
+    }
+    throw "Unsupported type for 6D cross polytope volume"
+}

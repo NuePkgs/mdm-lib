@@ -1,0 +1,152 @@
+# advanced/eigenvalues.pkg
+
+# Matrix-Vector Multiplication
+void MatrixVectorMultiply(matrix, vector) {
+    n = len(matrix);
+    result = array([n, 0.0]);
+
+    for (i = 0; i < n; i += 1) {
+        for (j = 0; j < len(vector); j += 1) {
+            result[i] += matrix[i][j] * vector[j];
+        }
+    }
+
+    return result;
+}
+
+# Matrix-Matrix Multiplication
+void MatrixMultiply(A, B) {
+    n = len(A);
+    m = len(B[0]);
+    p = len(B);
+    result = array(n, m, 0.0);
+
+    for (i = 0; i < n; i += 1) {
+        for (j = 0; j < m; j += 1) {
+            for (k = 0; k < p; k += 1) {
+                result[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    return result;
+}
+
+# Power Iteration Method
+void PowerIteration(matrix, num_iterations, tolerance) {
+    n = len(matrix);
+    b_k = array([n, 1.0]); # Start with a vector of ones
+
+    for (i = 0; i < num_iterations; i += 1) {
+        b_k1 = MatrixVectorMultiply(matrix, b_k);
+
+        b_k1_norm = 0.0;
+        for (j = 0; j < n; j += 1) {
+            b_k1_norm += b_k1[j] * b_k1[j];
+        }
+        b_k1_norm = math.Sqrt(b_k1_norm);
+
+        for (j = 0; j < n; j += 1) {
+            b_k[j] = b_k1[j] / b_k1_norm;
+        }
+
+        # Check for convergence
+        if (i > 0 && math.Abs(b_k1_norm - previous_norm) < tolerance) {
+            throw "BREAK";
+        }
+        previous_norm = b_k1_norm;
+    }
+
+    eigenvalue = b_k1_norm;
+    eigenvector = b_k;
+    return [eigenvalue, eigenvector];
+}
+
+# QR Algorithm for Eigenvalues
+void QREigenvalues(matrix, num_iterations, tolerance) {
+    n = len(matrix);
+    A = matrix.Copy();
+
+    for (i = 0; i < num_iterations; i += 1) {
+        [Q, R] = QRDecomposition(A);
+        A = MatrixMultiply(R, Q);
+
+        # Check for convergence (optional)
+        off_diagonal_norm = 0.0;
+        for (j = 0; j < n; j += 1) {
+            for (k = 0; k < j; k += 1) {
+                off_diagonal_norm += A[j][k] * A[j][k];
+            }
+        }
+        off_diagonal_norm = math.Sqrt(off_diagonal_norm);
+
+        if (off_diagonal_norm < tolerance) {
+            throw "BREAK";
+        }
+    }
+
+    eigenvalues = array(n, 0.0);
+    for (i = 0; i < n; i += 1) {
+        eigenvalues[i] = A[i][i];
+    }
+
+    return eigenvalues;
+}
+
+# QR Decomposition
+void QRDecomposition(matrix) {
+    n = len(matrix);
+    Q = array(n, n, 0.0);
+    R = array(n, n, 0.0);
+
+    for (i = 0; i < n; i += 1) {
+        for (j = 0; j < n; j += 1) {
+            Q[i][j] = matrix[i][j];
+        }
+    }
+
+    for (k = 0; k < n; k += 1) {
+        norm = 0.0;
+        for (i = 0; i < n; i += 1) {
+            norm += Q[i][k] * Q[i][k];
+        }
+        norm = math.Sqrt(norm);
+
+        R[k][k] = norm;
+        for (i = 0; i < n; i += 1) {
+            Q[i][k] /= norm;
+        }
+
+        for (j = k + 1; j < n; j += 1) {
+            dot_product = 0.0;
+            for (i = 0; i < n; i += 1) {
+                dot_product += Q[i][k] * Q[i][j];
+            }
+            R[k][j] = dot_product;
+            for (i = 0; i < n; i += 1) {
+                Q[i][j] -= dot_product * Q[i][k];
+            }
+        }
+    }
+
+    return [Q, R];
+}
+
+# Example usage
+void exampleUsage() {
+    matrix = [
+        [4, 1],
+        [2, 3]
+    ];
+
+    # Power Iteration Method
+    [eigenvalue, eigenvector] = PowerIteration(matrix, 100, 1*10**-6);
+    console.Println("Power Iteration Method Eigenvalue:", eigenvalue);
+    console.Println("Power Iteration Method Eigenvector:", eigenvector);
+
+    # QR Algorithm for Eigenvalues
+    eigenvalues = QREigenvalues(matrix, 100, 1*10**-6);
+    console.Println("QR Algorithm Eigenvalues:", eigenvalues);
+}
+
+exampleUsage();

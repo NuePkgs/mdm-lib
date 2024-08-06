@@ -1,0 +1,275 @@
+# Fundamental Constants
+const SPEED_OF_LIGHT = 299792458  # m/s
+const PLANCK_CONSTANT = 6.62607015 * 10 ** -34  # J·s
+const GRAVITATIONAL_CONSTANT = 6.67430 * 10 ** -11  # m^3 kg^-1 s^-2
+const ELEMENTARY_CHARGE = 1.602176634 * 10 ** -19  # C
+const BOLTZMANN_CONSTANT = 1.380649 * 10 ** -23  # J/K
+const GAS_CONSTANT = 8.314462618  # J/(mol·K)
+const AVOGADRO_CONSTANT = 6.02214076e23  # mol^-1
+const PERMITTIVITY_OF_FREE_SPACE = 8.854187817 * 10 ** -12  # F/m
+const MAGNETIC_CONSTANT = 4 * PI * 1 * 10 ** -7  # N/A^2
+const PERMEABILITY_OF_VACUUM = 4 * PI * 1 * 10 ** -7  # H/m
+
+# Atomic and Molecular Constants
+const BOHR_RADIUS = 5.291772108 * 10 ** -11  # m
+const RYDBERG_CONSTANT = 1.097373e7  # m^-1
+const HARTREE_ENERGY = 4.35974 * 10 ** -18  # J
+const DEUTERON_MAGNETIC_MOMENT = 4.112603 * 10 ** -27  # J/T
+const PROTON_MAGNETIC_MOMENT = 1.410606 * 10 ** -26  # J/T
+const NEUTRON_MAGNETIC_MOMENT = -9.6623 * 10 ** -27  # J/T
+
+# Electromagnetic Constants
+const ELECTRON_MASS = 9.10938356 * 10 ** -31  # kg
+const ELECTRON_MASS_ENERGY = 8.18721 * 10 ** -14  # J
+const ELECTRON_MAGNETIC_MOMENT = -9.284764 * 10 ** -24  # J/T
+const FINE_STRUCTURE_CONSTANT = 0.0072973525693
+const CLIGHT_SI = 2.99792458 * 10 ** 8  # m/s
+const THOMSON_SCATTERING_CROSS_SECTION = 6.6524587158 * 10 ** -29  # m^2
+
+# Quantum Physics Constants
+const PLANCK_LENGTH = 1.616255 * 10 ** -35  # m
+const PLANCK_TIME = 5.391247 * 10 ** -44  # s
+const PLANCK_MASS = 2.176434 * 10 ** -8  # kg
+const PLANCK_TEMPERATURE = 1.416808e32  # K
+const PLANCK_CHARGE = 1.875545956 * 10 ** -18  # C
+
+# Cosmological Constants
+const HUBBLE_CONSTANT = 67.36  # km/s/Mpc
+const COSMOLOGICAL_CONSTANT = 1.105 * 10 ** -52  # m^-2
+const DARK_ENERGY_DENSITY = 6.6 * 10 ** -27  # kg/m^3
+const CRITICAL_DENSITY = 8.5 * 10 ** -27  # kg/m^3
+
+# Thermodynamic Constants
+const STEFAN_BOLTZMANN_CONSTANT = 5.670374419 * 10 ** -8  # W/(m^2·K^4)
+const LAMBDA_WAVELENGTH = 1.065 * 10 ** -3  # m
+const ICE_WATER_VAPOR_PRESSURE = 611  # Pa
+const MOLECULAR_WATER_HEAT_CAPACITY = 75.3  # J/(mol·K)
+
+# Atomic Physics Constants
+const BOHR_MAGNETON = 9.274009994 * 10 ** -24  # J/T
+const NUCLEAR_MAGNETON = 5.050783699 * 10 ** -27  # J/T
+const FINE_STRUCTURE_CONSTANT_ALPHA = 0.0072973525693
+const RYDBERG_CONSTANT_R = 1.097373e7  # m^-1
+const HARTREE_ENERGY_1 = 4.35974 * 10 ** -18  # J
+
+# Gravity and Relativity Constants
+const SCHWARZSCHILD_RADIUS = 2.953 * 10 ** -9  # m (for 1 kg mass)
+const GRAVITATIONAL_ACCELERATION = 9.80665  # m/s^2
+const GENERAL_RELATIVITY_CONSTANT = 1.7449 * 10 ** -22  # m^2/kg/s^2
+
+# Particle Physics Constants
+const W_BOSON_MASS = 8.379 * 10 ** -25  # kg
+const Z_BOSON_MASS = 9.118 * 10 ** -25  # kg
+const TOP_QUARK_MASS = 1.735 * 10 ** -25  # kg
+const HIGGS_BOSON_MASS = 2.22 * 10 ** -25  # kg
+
+# High Energy Physics Constants
+const PLANCK_CHARGE = 1.875545956 * 10 ** -18  # C
+const PLANCK_VELOCITY = 1.0 * 10 ** -1  # m/s
+
+# Fundamental Constants in Metrology
+const MEGGA_HERTZ = 1.0e6  # Hz
+const MILLI_HERTZ = 1.0 * 10 ** -3  # Hz
+const MICRO_HERTZ = 1.0 * 10 ** -6  # Hz
+
+# Radioactive Decay Constants
+const HALF_LIFE_CARBON_14 = 5730  # years
+const HALF_LIFE_POTASSIUM_40 = 1.248 * 10 ** 9  # years
+const HALF_LIFE_URANIUM_238 = 4.468 * 10 ** 9  # years
+const HALF_LIFE_THORIUM_232 = 1.405 * 10 ** 10  # years
+
+# Various Constants
+const PLANCK_SCALE = 1.616255 * 10 ** -35  # m
+const HEAT_CAPACITY_OF_WATER = 4.186  # J/(g·K)
+const BOILING_POINT_WATER = 373.15  # K
+const FREEZING_POINT_WATER = 273.15  # K
+
+# Constants from Quantum Mechanics
+const BOHR_RADIUS = 5.291772108 * 10 ** -11  # m
+const FINE_STRUCTURE_CONSTANT_ALPHA = 0.0072973525693
+const HARTREE_ENERGY = 4.35974 * 10 ** -18  # J
+
+# Classical Mechanics Constants
+const G_FORCE = 9.80665  # m/s^2
+const GRAVITATIONAL_CONSTANT = 6.67430 * 10 ** -11  # m^3/kg/s^2
+
+# Electrodynamics Constants
+const ELECTRON_VOLT = 1.602176634 * 10 ** -19  # J
+const VACUUM_PERMITTIVITY = 8.854187817 * 10 ** -12  # F/m
+const VACUUM_PERMEABILITY = 4 * PI * 1 * 10 ** -7  # H/m
+
+# Constants from Chemistry
+const MOLAR_MASS_OF_WATER = 18.01528  # g/mol
+const MOLECULAR_WATER_HEAT_CAPACITY = 75.3  # J/(mol·K)
+const VAN_HOFF_FACTOR = 1.0
+
+# Constants Related to the Sun
+const SUN_MASS = 1.989 * 10 ** 30  # kg
+const SUN_RADIUS = 696340 * 10 ** 3 # m
+const SOLAR_LUMINOSITY = 3.828 * 10 ** 26  # W
+
+# Constants Related to the Earth
+const EARTH_RADIUS = 6371.0 * 10 ** 3 # m
+const EARTH_MASS = 5.972 * 10 ** 24  # kg
+const EARTH_ORBITAL_ECCENTRICITY = 0.0167086
+const EARTH_GRAVITY = 9.80665  # m/s^2
+
+# Constants Related to the Moon
+const MOON_RADIUS = 1737.4 * 10 ** 3 # m
+const MOON_MASS = 7.34767309e22  # kg
+
+# Constants for Astronomy
+const ASTRONOMICAL_UNIT = 1.496 * 10 ** 11  # m
+const LIGHT_YEAR = 9.461 * 10 ** 15  # m
+const PARSEC = 3.086 * 10 ** 16  # m
+
+# Constants Related to Radioactivity
+const HALF_LIFE_URANIUM_235 = 7.038 * 10 ** 8  # years
+const HALF_LIFE_THORIUM_230 = 7.54 * 10 ** 4  # years
+
+# Constants in Optics
+const REFRACTIVE_INDEX_AIR = 1.000293
+const REFRACTIVE_INDEX_WATER = 1.333
+
+# Constants in Acoustics
+const SPEED_OF_SOUND_AIR = 343.0  # m/s
+const SPEED_OF_SOUND_WATER = 1482.0  # m/s
+
+# Constants in Solid State Physics
+const LATTICE_PARAMETER_SILICON = 5.431  # Å
+const BAND_GAP_SILICON = 1.12  # eV
+
+# Constants in Fluid Mechanics
+const KINEMATIC_VISCOSITY_WATER = 1.0 * 10 ** -6  # m^2/s
+const DYNAMIC_VISCOSITY_AIR = 1.81 * 10 ** -5  # Pa·s
+
+# Constants in Thermodynamics
+const UNIVERSAL_GAS_CONSTANT = 8.314462618  # J/(mol·K)
+const HEAT_CAPACITY_AT_CONSTANT_VOLUME = 4.186  # J/(g·K)
+const HEAT_CAPACITY_AT_CONSTANT_PRESSURE = 4.184  # J/(g·K)
+
+# Constants Related to Space
+const KEPLER_CONSTANT = 1.327124e20  # m^3/kg/s^2
+
+# Constants in Nuclear Physics
+const NEUTRON_MASS = 1.675 * 10 ** -27  # kg
+const PROTON_MASS = 1.673 * 10 ** -27  # kg
+
+# Constants Related to Materials Science
+const YOUNG_MODULUS_STEEL = 200 * 10 ** 9  # Pa
+const SHEAR_MODULUS_STEEL = 80 * 10 ** 9  # Pa
+
+# Constants in Particle Physics
+const TOP_QUARK_MASS = 1.735 * 10 ** -25  # kg
+const W_BOSON_MASS = 8.379 * 10 ** -25  # kg
+
+# Constants in Magnetism
+const MAGNETIC_CONSTANT = 4 * PI * 1 * 10 ** -7  # N/A^2
+const ELECTRON_MAGNETIC_MOMENT = -9.284764 * 10 ** -24  # J/T
+
+# Constants in Thermodynamics
+const HEAT_CAPACITY_WATER = 4.186  # J/(g·K)
+const HEAT_CAPACITY_ICE = 2.093  # J/(g·K)
+
+# Constants in Optics
+const SPEED_OF_LIGHT_VACUUM = 299792458  # m/s
+const SPEED_OF_LIGHT_AIR = 299702547  # m/s
+
+# Constants in Acoustics
+const SPEED_OF_SOUND_AIR_20C = 343  # m/s
+const SPEED_OF_SOUND_WATER_25C = 1497  # m/s
+
+# Constants in Electrical Engineering
+const ELECTRICAL_RESISTIVITY_COPPER = 1.68 * 10 ** -8  # Ω·m
+const ELECTRICAL_RESISTIVITY_ALUMINUM = 2.82 * 10 ** -8  # Ω·m
+
+# Constants in Mechanical Engineering
+const BULK_MODULUS_WATER = 2.2 * 10 ** 9  # Pa
+const BULK_MODULUS_AIR = 1.4 * 10 ** 5  # Pa
+
+# Constants in Semiconductor Physics
+const BAND_GAP_GERMANIUM = 0.66  # eV
+const BAND_GAP_GALLIUM_ARSENIDE = 1.43  # eV
+
+# Constants in Molecular Physics
+const MOLECULAR_WEIGHT_OXYGEN = 31.998  # g/mol
+const MOLECULAR_WEIGHT_NITROGEN = 28.013  # g/mol
+
+# Constants in Quantum Mechanics
+const PLANCK_LENGTH = 1.616255 * 10 ** -35  # m
+const PLANCK_TIME = 5.391247 * 10 ** -44  # s
+
+# Constants in Particle Accelerators
+const PROTON_MASS = 1.6726219 * 10 ** -27  # kg
+const NEUTRON_MASS = 1.675 * 10 ** -27  # kg
+
+# Constants Related to the Moon
+const MOON_MASS = 7.34767309e22  # kg
+const MOON_ORBITAL_PERIOD = 27.32166  # days
+
+# Constants in Relativity
+const GRAVITATIONAL_CONSTANT = 6.67430 * 10 ** -11  # m^3/kg/s^2
+const GRAVITATIONAL_ACCELERATION = 9.80665  # m/s^2
+
+# Constants in Magnetism
+const MAGNETIC_MOMENT_ELECTRON = 9.284764 * 10 ** -24  # J/T
+const MAGNETIC_MOMENT_PROTON = 1.410606 * 10 ** -26  # J/T
+
+# Constants in Cosmology
+const HUBBLE_CONSTANT = 67.36  # km/s/Mpc
+const COSMOLOGICAL_CONSTANT = 1.105 * 10 ** -52  # m^-2
+
+# Constants in Thermodynamics
+const STEFAN_BOLTZMANN_CONSTANT = 5.670374419 * 10 ** -8  # W/(m^2·K^4)
+const MOLAR_HEAT_CAPACITY_WATER = 75.3  # J/(mol·K)
+
+# Constants in Nuclear Physics
+const NUCLEAR_MAGNETON = 5.050783699 * 10 ** -27  # J/T
+const DEUTERON_MAGNETIC_MOMENT = 4.112603 * 10 ** -27  # J/T
+
+# Constants Related to Radioactivity
+const HALF_LIFE_POTASSIUM_40 = 1.248 * 10 ** 9  # years
+const HALF_LIFE_CARBON_14 = 5730  # years
+const HALF_LIFE_THORIUM_232 = 1.405 * 10 ** 10  # years
+
+# Constants in Fluid Mechanics
+const KINEMATIC_VISCOSITY_AIR = 1.48 * 10 ** -5  # m^2/s
+const KINEMATIC_VISCOSITY_WATER = 1.0 * 10 ** -6  # m^2/s
+
+# Constants in Acoustics
+const SPEED_OF_SOUND_AIR = 343  # m/s
+const SPEED_OF_SOUND_WATER = 1482  # m/s
+
+# Constants in Material Science
+const YOUNG_MODULUS_ALUMINUM = 69 * 10 ** 9  # Pa
+const YOUNG_MODULUS_COPPER = 110 * 10 ** 9  # Pa
+
+# Constants in Solid State Physics
+const LATTICE_PARAMETER_SILICON = 5.431  # Å
+const LATTICE_PARAMETER_GERMANIUM = 5.658  # Å
+
+# Constants Related to Astronomy
+const EARTH_ORBITAL_ECCENTRICITY = 0.0167086
+const EARTH_RADIUS = 6371.0 * 10 ** 3 # m
+const EARTH_MASS = 5.972 * 10 ** 24  # kg
+const SUN_RADIUS = 696340.0 * 10 ** 3 # m
+
+# Constants Related to the Sun
+const SUN_MASS = 1.989 * 10 ** 30  # kg
+const SUN_LUMINOSITY = 3.828 * 10 ** 26  # W
+
+# Constants in Chemistry
+const MOLECULAR_WEIGHT_NITROGEN = 28.013  # g/mol
+const MOLECULAR_WEIGHT_OXYGEN = 31.998  # g/mol
+
+# Constants in Classical Mechanics
+const GRAVITATIONAL_ACCELERATION = 9.80665  # m/s^2
+const GRAVITATIONAL_CONSTANT = 6.67430 * 10 ** -11  # m^3/kg/s^2
+
+# Constants in Particle Physics
+const W_BOSON_MASS = 8.379 * 10 ** -25  # kg
+const Z_BOSON_MASS = 9.118 * 10 ** -25  # kg
+
+# Constants in Quantum Mechanics
+const PLANCK_MASS = 2.176434 * 10 ** -8  # kg
+const PLANCK_CHARGE = 1.875545956 * 10 ** -18  # C

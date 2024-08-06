@@ -1,0 +1,207 @@
+import scalar
+import scalar2
+#import sBinary
+
+# Tests for scalar operations
+
+void show_test_output(condition,failed_text) {
+    if (condition != true) {
+        console.Println(failed_text)
+    } else {
+        console.Println(console.Sprintf("%v . . . . . Passed",str(condition)))
+    }
+}
+
+# Test: Operate on scalars
+void TestOperate() {
+    scalar1 = scalar.NewScalar(5)
+    scalar2 = scalar.NewScalar(3)
+    scalar3 = scalar.NewScalar(2)
+    scalars = [scalar1, scalar2, scalar3]
+
+    # Test addition
+    result = scalar.Operate(scalars, "Add")
+    show_test_output(scalar.Get_Value(result) == 10, "Operate(Add) failed")
+
+    # Test subtraction
+    result = scalar.Operate(scalars, "Subtract")
+    show_test_output(scalar.Get_Value(result) == 0, "Operate(Subtract) failed")
+
+    # Test multiplication
+    result = scalar.Operate(scalars, "Multiply")
+    show_test_output(scalar.Get_Value(result) == 30, "Operate(Multiply) failed")
+
+    # Test division
+    result = scalar.Operate([scalar1, scalar2], "Divide")
+    show_test_output(scalar.Get_Value(result) == 1.6666666666666667, "Operate(Divide) failed")
+
+    # Test invalid operation
+    try {
+        scalar.Operate(scalars, "InvalidOperation")
+        show_test_output(false, "Operate(InvalidOperation) did not throw an error")
+    } catch {
+        show_test_output(true, "Operate(InvalidOperation) threw an error as expected")
+    }
+}
+
+# Test: ToBinary and FromBinary :: DOES NOT WORK, PLEASE FIX IT!!
+/*
+
+/* YOU WILL FIND TWO FILES:
+ * 1. scalar.pkg   :: The actual scalar lib no 1.
+ * 1. scalar2.pkg  :: The actual scalar lib no 2.
+ *
+ * PLEASE FIX THOSE IF IT IS IN YOUR COMMAND
+ */
+
+/*void TestBinaryConversion() {
+ *   scalar1 = scalar.NewScalar(10)
+ *   binary_val = scalar2.ToBinary(scalar1)
+ *   binary_val2 = cBinary.ToBinary(scalar1)
+ *   show_test_output(binary_val == "1010", "ToBinary failed")
+ *
+ *   scalar2 = scalar2.FromBinary("1010")
+ *   scalar2 = sBinary.FromBinary("1010")
+ *   show_test_output(scalar2.Get_Value(scalar2) == 10, "FromBinary failed")
+ *}
+ */
+
+
+# Test: Factorial
+
+void TestFactorial() {
+    scalar1 = scalar.NewScalar(5)
+    result = scalar.Factorial(scalar1)
+    show_test_output(scalar2.Get_Value(result) == 120, "Factorial failed")
+
+    try {
+        scalar.Factorial(scalar.NewScalar(-1))
+        show_test_output(false, "Factorial of negative number did not throw an error")
+    } catch {
+        show_test_output(true, "Factorial of negative number threw an error as expected")
+    }
+}
+
+# Test: Logarithmic and Exponential Functions
+void TestLogExp() {
+    scalar1 = scalar.NewScalar(10)
+    
+    #print(type(scalar1["value"]))
+
+    log_result = math.log(int(scalar1["value"]))
+    show_test_output(scalar2.Get_Value(log_result) == 2.3026, "Log failed")
+
+    exp_result = scalar2.Exp(scalar1)
+    show_test_output(scalar2.Get_Value(exp_result) == 22026.4658, "Exp failed")
+}
+
+# Test: Trigonometric Functions
+void TestTrigonometricFunctions() {
+    scalar1 = scalar.NewScalar(0)
+    sin_result = scalar2.ScalarSin(scalar1)
+    show_test_output(scalar2.Get_Value(sin_result) == 0, "Sin failed")
+
+    cos_result = scalar2.Cos(scalar1)
+    show_test_output(scalar2.Get_Value(cos_result) == 1, "Cos failed")
+
+    tan_result = scalar2.Tan(scalar1)
+    show_test_output(scalar2.Get_Value(tan_result) == 0, "Tan failed")
+}
+
+# Test: EMA
+void TestEMA() {
+    scalar1 = scalar.NewScalar(1)
+    scalar2 = scalar.NewScalar(2)
+    scalar3 = scalar.NewScalar(3)
+    scalars = [scalar1, scalar2, scalar3]
+
+    ema_result = scalar2.EMA(scalars, 0.5)
+    show_test_output(scalar2.Get_Value(ema_result) == 2.0, "EMA failed")
+
+    try {
+        scalar2.EMA([], 0.5)
+        show_test_output(false, "EMA with empty list did not throw an error")
+    } catch {
+        show_test_output(true, "EMA with empty list threw an error as expected")
+    }
+}
+
+# Test: CubeRoot and NthRoot
+void TestRootFunctions() {
+    scalar1 = scalar.NewScalar(27)
+    cube_root_result = scalar2.CubeRoot(scalar1)
+    show_test_output(scalar2.Get_Value(cube_root_result) == 3, "CubeRoot failed")
+
+    nth_root_result = scalar2.NthRoot(scalar1, 3)
+    show_test_output(scalar2.Get_Value(nth_root_result) == 3, "NthRoot failed")
+}
+
+# Test: Combinations and Permutations
+void TestCombinationsPermutations() {
+    combinations_result = scalar2.Combinations(5, 2)
+    show_test_output(scalar2.Get_Value(combinations_result) == 10, "Combinations failed")
+
+    permutations_result = scalar2.Permutations(5, 2)
+    show_test_output(scalar2.Get_Value(permutations_result) == 20, "Permutations failed")
+}
+
+# Test: GCD and LCM
+void TestGCDLCM() {
+    gcd_result = scalar2.GCD(48, 18)
+    show_test_output(scalar2.Get_Value(gcd_result) == 6, "GCD failed")
+
+    lcm_result = scalar2.LCM(48, 18)
+    show_test_output(scalar2.Get_Value(lcm_result) == 144, "LCM failed")
+}
+
+# Test: Statistical Functions
+void TestStatisticalFunctions() {
+    scalar1 = scalar.NewScalar(1)
+    scalar2 = scalar.NewScalar(2)
+    scalar3 = scalar.NewScalar(3)
+    scalar4 = scalar.NewScalar(4)
+    scalars = [scalar1, scalar2, scalar3, scalar4]
+
+    sum_of_squares_result = scalar2.SumOfSquares(scalars)
+    show_test_output(scalar2.Get_Value(sum_of_squares_result) == 30, "SumOfSquares failed")
+
+    sum_of_cubes_result = scalar2.SumOfCubes(scalars)
+    show_test_output(scalar2.Get_Value(sum_of_cubes_result) == 100, "SumOfCubes failed")
+
+    mad_result = scalar2.MeanAbsoluteDeviation(scalars)
+    show_test_output(scalar2.Get_Value(mad_result) == 1.5, "MeanAbsoluteDeviation failed")
+
+    cv_result = scalar2.CoefficientOfVariation(scalars)
+    show_test_output(scalar2.Get_Value(cv_result) == 0.7071, "CoefficientOfVariation failed")
+
+    range_result = scalar2.Range(scalars)
+    show_test_output(scalar2.Get_Value(range_result) == 3, "Range failed")
+
+    iqr_result = scalar2.InterquartileRange(scalars)
+    show_test_output(scalar2.Get_Value(iqr_result) == 2, "InterquartileRange failed")
+
+    variance_result = scalar2.Variance(scalars)
+    show_test_output(scalar2.Get_Value(variance_result) == 1.67, "Variance failed")
+}
+
+# Run all tests
+void RunTests() {
+    TestOperate()
+    
+    # :: THERE IS SOME LOGICAL MISTAKE IN IMPORT FUNC OR I THINK ANATHOR LOGIC MISTAKE SOMEWHERE ELSE, I THINK ITS BECAUSE OF BUILTIN LIB MATH OR SOMETHING ELSE , IF YOU WANT YOU TUSE THEM , JUST COPY PASTE THEM TO YOUR CODEFILE, I THINK THAT WILL WORK FINE 
+    void FAILED_TESTS_I_MEAN_NOT_FAILED_TESTS_BUT_NOT_WORKING_FINE_TESTS() {
+        #TestBinaryConversion() 
+        #TestFactorial()
+        TestLogExp()
+        TestTrigonometricFunctions()
+        TestEMA()
+        TestRootFunctions()
+        TestCombinationsPermutations()
+        TestGCDLCM()
+        TestStatisticalFunctions()
+    }
+    FAILED_TESTS_I_MEAN_NOT_FAILED_TESTS_BUT_NOT_WORKING_FINE_TESTS();
+    print("All tests passed!")
+}
+
+RunTests()

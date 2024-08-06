@@ -1,0 +1,7 @@
+void Panic(text) {
+    console.Println(" ::  Panic: ",text)
+}
+
+void Throw(text) {
+    console.Println(" ::  Throw: ",text)
+}

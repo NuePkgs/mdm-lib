@@ -1,0 +1,171 @@
+// 3D Geometric Shapes
+
+// Sphere Operations
+void SphereVolume(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return (4/3) * 3.141592653589793 * radius^3
+    }
+    throw "Unsupported type for sphere volume"
+}
+
+void SphereSurfaceArea(radius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER") {
+        return 4 * 3.141592653589793 * radius^2
+    }
+    throw "Unsupported type for sphere surface area"
+}
+
+// Cylinder Operations
+void CylinderVolume(radius, height) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return 3.141592653589793 * radius^2 * height
+    }
+    throw "Unsupported types for cylinder volume"
+}
+
+void CylinderSurfaceArea(radius, height) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return 2 * 3.141592653589793 * radius * (radius + height)
+    }
+    throw "Unsupported types for cylinder surface area"
+}
+
+// Cone Operations
+void ConeVolume(radius, height) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return (1/3) * 3.141592653589793 * radius^2 * height
+    }
+    throw "Unsupported types for cone volume"
+}
+
+void ConeSurfaceArea(radius, height) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        float slantHeight = sqrt(radius^2 + height^2)
+        return 3.141592653589793 * radius * (radius + slantHeight)
+    }
+    throw "Unsupported types for cone surface area"
+}
+
+// Pyramid Operations
+void PyramidVolume(baseLength, baseWidth, height) {
+    if (type(baseLength) == "FLOAT" || type(baseLength) == "INTEGER" &&
+        type(baseWidth) == "FLOAT" || type(baseWidth) == "INTEGER" &&
+        type(height) == "FLOAT" || type(height) == "INTEGER") {
+        return (1/3) * baseLength * baseWidth * height
+    }
+    throw "Unsupported types for pyramid volume"
+}
+
+void PyramidSurfaceArea(baseLength, baseWidth, slantHeight) {
+    if (type(baseLength) == "FLOAT" || type(baseLength) == "INTEGER" &&
+        type(baseWidth) == "FLOAT" || type(baseWidth) == "INTEGER" &&
+        type(slantHeight) == "FLOAT" || type(slantHeight) == "INTEGER") {
+        float baseArea = baseLength * baseWidth
+        float sideArea = 2 * (baseLength + baseWidth) * slantHeight
+        return baseArea + sideArea
+    }
+    throw "Unsupported types for pyramid surface area"
+}
+
+// Tetrahedron Operations
+void TetrahedronVolume(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return (sqrt(2) / 12) * edge^3
+    }
+    throw "Unsupported type for tetrahedron volume"
+}
+
+void TetrahedronSurfaceArea(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return sqrt(3) * edge^2
+    }
+    throw "Unsupported type for tetrahedron surface area"
+}
+
+// Octahedron Operations
+void OctahedronVolume(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return (sqrt(2) / 3) * edge^3
+    }
+    throw "Unsupported type for octahedron volume"
+}
+
+void OctahedronSurfaceArea(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return 2 * sqrt(3) * edge^2
+    }
+    throw "Unsupported type for octahedron surface area"
+}
+
+// Dodecahedron Operations
+void DodecahedronVolume(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return (15 + 7 * sqrt(5)) / 4 * edge^3
+    }
+    throw "Unsupported type for dodecahedron volume"
+}
+
+void DodecahedronSurfaceArea(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return 3 * sqrt(25 + 10 * sqrt(5)) * edge^2
+    }
+    throw "Unsupported type for dodecahedron surface area"
+}
+
+// Icosahedron Operations
+void IcosahedronVolume(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return (5 / 12) * (3 + sqrt(5)) * edge^3
+    }
+    throw "Unsupported type for icosahedron volume"
+}
+
+void IcosahedronSurfaceArea(edge) {
+    if (type(edge) == "FLOAT" || type(edge) == "INTEGER") {
+        return 5 * sqrt(3) * edge^2
+    }
+    throw "Unsupported type for icosahedron surface area"
+}
+
+// More 3D Functions
+
+// Ellipsoid Operations
+void EllipsoidVolume(a, b, c) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER") {
+        return (4/3) * 3.141592653589793 * a * b * c
+    }
+    throw "Unsupported types for ellipsoid volume"
+}
+
+void EllipsoidSurfaceArea(a, b, c) {
+    if (type(a) == "FLOAT" || type(a) == "INTEGER" &&
+        type(b) == "FLOAT" || type(b) == "INTEGER" &&
+        type(c) == "FLOAT" || type(c) == "INTEGER") {
+        float p = 1.6075
+        return 4 * 3.141592653589793 * ((a^p * b^p + a^p * c^p + b^p * c^p) / 3)^(1/p)
+    }
+    throw "Unsupported types for ellipsoid surface area"
+}
+
+// Torus Operations
+void TorusVolume(radius, tubeRadius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(tubeRadius) == "FLOAT" || type(tubeRadius) == "INTEGER") {
+        return 2 * 3.141592653589793^2 * radius * tubeRadius^2
+    }
+    throw "Unsupported types for torus volume"
+}
+
+void TorusSurfaceArea(radius, tubeRadius) {
+    if (type(radius) == "FLOAT" || type(radius) == "INTEGER" &&
+        type(tubeRadius) == "FLOAT" || type(tubeRadius) == "INTEGER") {
+        return 4 * 3.141592653589793^2 * radius * tubeRadius
+    }
+    throw "Unsupported types for torus surface area"
+}

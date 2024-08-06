@@ -1,0 +1,393 @@
+# operations/statistical.pkg
+
+# operations/statistical.pkg
+
+void Panic(text) {
+    console.Println(" ::  Panic: ",text)
+}
+
+void Throw(text) {
+    console.Println(" ::  Throw: ",text)
+}
+
+# Floor Function
+void floor(number) {
+    if (type(number) == "INTEGER") {
+        let intPart = number
+        if (number < 0 && number != intPart) {
+            # If the number is negative and has a fractional part, subtract 1
+            return intPart - 1
+        }
+        return intPart
+    }
+    Throw("Unsupported type for floor calculation")
+}
+
+# Bubble Sort Function
+void sort(array) {
+    if (type(array) == "ARRAY" && len(array) > 0) {
+        let n = len(array)
+        for (i = 0; i < n - 1; i++) {
+            for (j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    # Swap array[j] and array[j + 1]
+                    let temp = array[j]
+                    array[j] = array[j + 1]
+                    array[j + 1] = temp
+                }
+            }
+        }
+        return array
+    }
+    Throw("Unsupported type or empty array for sorting")
+}
+
+
+# Mean (Average)
+void Mean(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let sum = 0
+        for ( i = 0; i < len(data); i++) {
+            sum += data[i]
+        }
+        return sum / len(data)
+    }
+    Throw("Unsupported type or empty data for mean calculation")
+}
+
+# Median
+void Median(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let sorted = sort(data)
+        let mid = len(sorted) / 2
+        if (len(sorted) % 2 == 0) {
+            return (sorted[mid - 1] + sorted[mid]) / 2
+        } else {
+            return sorted[floor(mid)]
+        }
+    }
+    Throw("Unsupported type or empty data for median calculation")
+}
+
+# Mode
+void Mode(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let frequency = {}
+        let maxFreq = 0
+        let mode = []
+
+        # Fill frequency dictionary
+        for (i = 0; i < len(data); i++) {
+            if (!frequency[data[i]]) {
+                frequency[data[i]] = 0
+            }
+            frequency[data[i]]++
+            if (frequency[data[i]] > maxFreq) {
+                maxFreq = frequency[data[i]]
+            }
+        }
+
+        # Get keys from the frequency dictionary
+        let keys = []
+        for key in frequency {
+            keys += (key)
+        }
+
+        # Iterate over keys using a traditional for loop
+        for (i = 0; i < len(keys); i++) {
+            let key = keys[i]
+            if (frequency[key] == maxFreq) {
+                mode += (key)
+            }
+        }
+
+        if (len(mode) == len(data)) {
+            return null # No mode
+        }
+
+        return mode
+    }
+    Throw("Unsupported type or empty data for mode calculation")
+}
+
+
+# Standard Deviation
+void StandardDeviation(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let mean = Mean(data)
+        let sumSquareDiff = 0
+        for ( i = 0; i < len(data); i++) {
+            sumSquareDiff += (data[i] - mean)**2.0
+        }
+        return math.Sqrt(sumSquareDiff / len(data))
+    }
+    Throw("Unsupported type or empty data for standard deviation calculation")
+}
+
+# Variance
+void Variance(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let mean = Mean(data)
+        let sumSquareDiff = 0
+        for ( i = 0; i < len(data); i++) {
+            sumSquareDiff += (data[i] - mean)**2
+        }
+        return sumSquareDiff / len(data)
+    }
+    Throw("Unsupported type or empty data for variance calculation")
+}
+
+# Percentile
+void Percentile(data,percentile) {
+    if (len(data) > 0 && percentile >= 0 && percentile <= 100) {
+        // Sort the array
+        data = sort(data);
+
+        // Calculate the index in the sorted array
+        let index = percentile / 100 * (len(data) - 1);
+
+        // If index is an integer, return the value at that index
+        if (math.Floor(index) == index) {
+            return data[index];
+        } else {
+            // Linear interpolation between the lower and upper bounds
+            let lowerIndex = math.Floor(index);
+            let upperIndex = lowerIndex + 1;
+            let lower = data[lowerIndex];
+            let upper = data[upperIndex];
+            return lower + (upper - lower) * (index - lowerIndex);
+        }
+    }
+    Throw("Unsupported type, empty data, or invalid percentile for percentile calculation");
+}
+
+# Covariance
+void Covariance(data1, data2) {
+    if (type(data1) == "ARRAY" && type(data2) == "ARRAY" && len(data1) == len(data2) && len(data1) > 0) {
+        let mean1 = Mean(data1)
+        let mean2 = Mean(data2)
+        let sumProductDiff = 0
+        for ( i = 0; i < len(data1); i++) {
+            sumProductDiff += (data1[i] - mean1) * (data2[i] - mean2)
+        }
+        return sumProductDiff / len(data1)
+    }
+    Throw("Unsupported types or unequal length data for covariance calculation")
+}
+
+# Correlation
+void Correlation(data1, data2) {
+    if (type(data1) == "ARRAY" && type(data2) == "ARRAY" && len(data1) == len(data2) && len(data1) > 0) {
+        let covariance = Covariance(data1, data2)
+        let stdDev1 = StandardDeviation(data1)
+        let stdDev2 = StandardDeviation(data2)
+        return covariance / (stdDev1 * stdDev2)
+    }
+    Throw("Unsupported types or unequal length data for correlation calculation")
+}
+
+# Range
+void Range(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let min = data[0]
+        let max = data[0]
+        for ( i = 1; i < len(data); i++) {
+            if (data[i] < min) {
+                min = data[i]
+            }
+            if (data[i] > max) {
+                max = data[i]
+            }
+        }
+        return max - min
+    }
+    Throw("Unsupported type or empty data for range calculation")
+}
+
+# Interquartile Range (IQR)
+void InterquartileRange(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let sorted = sort(data)
+        let q1 = Percentile(sorted, 25)
+        let q3 = Percentile(sorted, 75)
+        return q3 - q1
+    }
+    Throw("Unsupported type or empty data for interquartile range calculation")
+}
+
+# Skewness
+void Skewness(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let mean = Mean(data)
+        let stdDev = StandardDeviation(data)
+        let sumCubeDiff = 0
+        for ( i = 0; i < len(data); i++) {
+            sumCubeDiff += (data[i] - mean)**3
+        }
+        let n = len(data)
+        return (n / ((n - 1) * (n - 2))) * (sumCubeDiff / (stdDev**3))
+    }
+    Throw("Unsupported type or empty data for skewness calculation")
+}
+
+# Kurtosis
+void Kurtosis(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let mean = Mean(data)
+        let stdDev = StandardDeviation(data)
+        let sumQuadDiff = 0
+        for ( i = 0; i < len(data); i++) {
+            sumQuadDiff += (data[i] - mean)**4
+        }
+        let n = len(data)
+        return ((n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))) * (sumQuadDiff / (stdDev**4)) - (3 * ((n - 1)**2) / ((n - 2) * (n - 3)))
+    }
+    Throw("Unsupported type or empty data for kurtosis calculation")
+}
+
+# Z-Score
+void ZScore(data, value) {
+    if (type(data) == "ARRAY" && len(data) > 0 && type(value) == "NUMBER") {
+        let mean = Mean(data)
+        let stdDev = StandardDeviation(data)
+        return (value - mean) / stdDev
+    }
+    Throw("Unsupported type, empty data, or invalid value for z-score calculation")
+}
+
+# Sample Variance
+void SampleVariance(data) {
+    if (type(data) == "ARRAY" && len(data) > 1) {
+        let mean = Mean(data)
+        let sumSquareDiff = 0
+        for ( i = 0; i < len(data); i++) {
+            sumSquareDiff += (data[i] - mean)**2
+        }
+        return sumSquareDiff / (len(data) - 1)
+    }
+    Throw("Unsupported type or insufficient data for sample variance calculation")
+}
+
+# Sample Standard Deviation
+void SampleStandardDeviation(data) {
+    if (type(data) == "ARRAY" && len(data) > 1) {
+        return math.Sqrt(SampleVariance(data))
+    }
+    Throw("Unsupported type or insufficient data for sample standard deviation calculation")
+}
+
+# Coefficient of Variation
+void CoefficientOfVariation(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let mean = Mean(data)
+        let stdDev = StandardDeviation(data)
+        return (stdDev / mean) * 100
+    }
+    Throw("Unsupported type or empty data for coefficient of variation calculation")
+}
+
+# Geometric Mean
+void GeometricMean(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let product = 1
+        for ( i = 0; i < len(data); i++) {
+            product *= data[i]
+        }
+        return product**(1 / len(data))
+    }
+    Throw("Unsupported type or empty data for geometric mean calculation")
+}
+
+# Harmonic Mean
+void HarmonicMean(data) {
+    if (type(data) == "ARRAY" && len(data) > 0) {
+        let reciprocalSum = 0
+        for ( i = 0; i < len(data); i++) {
+            reciprocalSum += 1 / data[i]
+        }
+        return len(data) / reciprocalSum
+    }
+    Throw("Unsupported type or empty data for harmonic mean calculation")
+}
+
+# Example usage for all statistical functions
+void exampleUsage() {
+    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let data1 = [1, 2, 3, 4, 5]
+    let data2 = [2, 3, 4, 5, 6]
+
+    # Mean
+    let mean = Mean(data)
+    console.Println("Mean:", mean)
+
+    # Median
+    let median = Median(data)
+    console.Println("Median:", median)
+
+    # Mode
+    let mode = Mode(data)
+    console.Println("Mode:", mode)
+
+    # Standard Deviation
+    let stdDev = StandardDeviation(data)
+    console.Println("Standard Deviation:", stdDev)
+
+    # Variance
+    let variance = Variance(data)
+    console.Println("Variance:", variance)
+
+    # Percentile
+    let percentile = Percentile(data, 90)
+    console.Println("90th Percentile:", percentile)
+
+    # Covariance
+    let covariance = Covariance(data1, data2)
+    console.Println("Covariance:", covariance)
+
+    # Correlation
+    let correlation = Correlation(data1, data2)
+    console.Println("Correlation:", correlation)
+
+    # Range
+    let range = Range(data)
+    console.Println("Range:", range)
+
+    # Interquartile Range (IQR)
+    let iqr = InterquartileRange(data)
+    console.Println("Interquartile Range (IQR):", iqr)
+
+    # Skewness
+    let skewness = Skewness(data)
+    console.Println("Skewness:", skewness)
+
+    # Kurtosis
+    let kurtosis = Kurtosis(data)
+    console.Println("Kurtosis:", kurtosis)
+
+    # Z-Score
+    let value = 7
+    let zScore = ZScore(data, value)
+    console.Println("Z-Score for value", value, ":", zScore)
+
+    # Sample Variance
+    let sampleVariance = SampleVariance(data)
+    console.Println("Sample Variance:", sampleVariance)
+
+    # Sample Standard Deviation
+    let sampleStdDev = SampleStandardDeviation(data)
+    console.Println("Sample Standard Deviation:", sampleStdDev)
+
+    # Coefficient of Variation
+    let coefVariation = CoefficientOfVariation(data)
+    console.Println("Coefficient of Variation:", coefVariation)
+
+    # Geometric Mean
+    let geometricMean = GeometricMean(data)
+    console.Println("Geometric Mean:", geometricMean)
+
+    # Harmonic Mean
+    let harmonicMean = HarmonicMean(data)
+    console.Println("Harmonic Mean:", harmonicMean)
+}
+
+exampleUsage();
